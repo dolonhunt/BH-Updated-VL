@@ -32,11 +32,6 @@ async function getCompanyFromDB(): Promise<typeof DEFAULT_COMPANY> {
 }
 
 function applyLetterheadSettings(html: string, formData: Record<string, any>): string {
-  const globalLogo = formData._global_logo
-  if (globalLogo) {
-    html = html.replace(/(<img class="pg-logo"[^>]*src=")[^"]*(")/, `$1${globalLogo.replace(/"/g, '&quot;')}$2`)
-  }
-
   const lhStr = formData._letterhead_config
   let config: any
 
@@ -47,8 +42,8 @@ function applyLetterheadSettings(html: string, formData: Record<string, any>): s
   if (!config) {
     const ghs = formData._global_header_style
     const gfs = formData._global_footer_style
-    if (ghs === 'minimal' || gfs === 'minimal') {
-      config = { headerStyle: ghs || 'default', footerStyle: gfs || 'default', headerEnabled: true, footerEnabled: true }
+    if ((ghs && ghs !== 'default') || (gfs && gfs !== 'default')) {
+      config = { headerEnabled: ghs !== 'hidden', footerEnabled: gfs !== 'hidden' }
     } else {
       return html
     }
@@ -56,23 +51,10 @@ function applyLetterheadSettings(html: string, formData: Record<string, any>): s
 
   if (config.headerEnabled === false) {
     html = html.replace(/<div class="pg-header">[\s\S]*?<\/div>/, '')
-  } else if (config.headerStyle === 'minimal') {
-    html = html.replace(/<img class="pg-logo"[^>]*\/>[\s]*/, '')
   }
 
   if (config.footerEnabled === false) {
     html = html.replace(/<div class="pg-foot-wrap">[\s\S]*?<\/div>/, '')
-  } else if (config.footerStyle === 'minimal') {
-    html = html.replace(/<div class="pg-footer">[\s\S]*?<\/div>/, '')
-    html = html.replace(/<img class="pg-pin"[^>]*\/>[\s]*/, '')
-    html = html.replace(/<span class="pg-foot-label">[^<]*<\/span>[\s]*/, '')
-    html = html.replace(/<span class="pg-foot-addr">[^<]*<\/span>[\s]*/, '')
-    html = html.replace(/<hr class="pg-rule-thin"\/>[\s]*/, '')
-  }
-
-  if (config.footerAddress) {
-    const addr = config.footerAddress.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    html = html.replace(/(<span class="pg-foot-addr">)[^<]*(<\/span>)/, `$1${addr}$2`)
   }
 
   return html

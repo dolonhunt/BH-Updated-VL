@@ -57,6 +57,8 @@ export type View =
   // Other views
   | 'employees'
   | 'employee_list'
+  | 'hr_handbook'
+  | 'leave_policy'
   | 'settings'
   | 'template_admin'
 
@@ -95,6 +97,8 @@ export type DocType =
   | 'appreciation_letter'
   | 'leave_approval'
   | 'lwp_notice'
+  | 'hr_handbook'
+  | 'leave_policy'
 
 interface DocItem {
   key: DocType
@@ -179,6 +183,14 @@ export const CATEGORIES: Category[] = [
     items: [
       { key: 'leave_approval', label: 'Leave Approval', icon: <FileText className="w-4 h-4" />, desc: 'Extended leave confirmation' },
       { key: 'lwp_notice', label: 'LWP Notice', icon: <FileText className="w-4 h-4" />, desc: 'Leave Without Pay notice' },
+    ],
+  },
+  {
+    name: 'HR Policies',
+    icon: <FileText className="w-4 h-4" />,
+    items: [
+      { key: 'hr_handbook', label: 'HR Handbook', icon: <FileText className="w-4 h-4" />, desc: 'Company HR policies & procedures' },
+      { key: 'leave_policy', label: 'Leave Policy', icon: <FileText className="w-4 h-4" />, desc: 'Leave types & application rules' },
     ],
   },
   {

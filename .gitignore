@@ -76,7 +76,7 @@ BH Office V1/
 docs/
 download/
 examples/
-lib/
+/lib/
 mini-services/
 tests/
 
@@ -91,3 +91,5 @@ bun.lock
 # standalone scripts (not needed in repo)
 scripts/generate-appointment-docx.js
 scripts/generate-salary-cert-docx.js
+
+.vercel

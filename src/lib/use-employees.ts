@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from 'react'
 import { type Employee } from './storage'
+import { authHeaders } from './api-client'
 
 let cached: Employee[] | null = null
 let fetchPromise: Promise<Employee[]> | null = null
@@ -11,7 +12,7 @@ const EMPTY_ARRAY: Employee[] = []
 function getSnapshot(): Employee[] {
   if (cached === null) {
     if (!fetchPromise && typeof window !== 'undefined') {
-      fetchPromise = fetch('/api/employees')
+      fetchPromise = fetch('/api/employees', { headers: authHeaders() })
         .then(res => {
           if (!res.ok) throw new Error('Failed to fetch employees')
           return res.json()

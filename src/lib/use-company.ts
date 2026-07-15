@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from 'react'
 import { type CompanyConfig } from './storage'
+import { authHeaders } from './api-client'
 
 let cached: CompanyConfig | null = null
 let fetchPromise: Promise<CompanyConfig> | null = null
@@ -19,7 +20,7 @@ const DEFAULT_COMPANY: CompanyConfig = {
 function getSnapshot(): CompanyConfig {
   if (cached === null) {
     if (!fetchPromise && typeof window !== 'undefined') {
-      fetchPromise = fetch('/api/company')
+      fetchPromise = fetch('/api/company', { headers: authHeaders() })
         .then(res => {
           if (!res.ok) throw new Error('Failed to fetch company config')
           return res.json()

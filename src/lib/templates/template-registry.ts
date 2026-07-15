@@ -32,6 +32,8 @@ import { leaveApprovalHTML } from './leave-approval'
 import { lwpNoticeHTML } from './lwp-notice'
 import { arrearPaymentHTML } from './arrear-payment'
 import { probationConfirmationHTML } from './probation-confirmation'
+import { hrHandbookHTML } from './hr-handbook'
+import { leavePolicyHTML } from './leave-policy'
 
 export interface TemplateRegistryEntry {
   key: string
@@ -75,6 +77,8 @@ export const TEMPLATE_REGISTRY: Record<string, TemplateRegistryEntry> = {
   lwp_notice: { key: 'lwp_notice', label: 'LWP Notice', category: 'Leave & Attendance', fn: lwpNoticeHTML },
   arrear_payment: { key: 'arrear_payment', label: 'Arrear Payment', category: 'Payroll & Compensation', fn: arrearPaymentHTML },
   probation_confirmation: { key: 'probation_confirmation', label: 'Probation Confirmation', category: 'Hiring & Onboarding', fn: probationConfirmationHTML },
+  hr_handbook: { key: 'hr_handbook', label: 'HR Handbook', category: 'HR Policies', fn: hrHandbookHTML },
+  leave_policy: { key: 'leave_policy', label: 'Leave Policy', category: 'HR Policies', fn: leavePolicyHTML },
 }
 
 export const TEMPLATES: TemplateRegistryEntry[] = Object.values(TEMPLATE_REGISTRY)

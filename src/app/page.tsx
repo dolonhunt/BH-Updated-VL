@@ -54,6 +54,7 @@ import { TemplateAdmin } from '@/components/templates/TemplateAdmin'
 import { CommandPalette } from '@/components/layout/CommandPalette'
 import { EmailDialog } from '@/components/editor/EmailDialog'
 import { ComingSoonForm } from '@/components/forms/ComingSoonForm'
+import { PolicyDocForm } from '@/components/forms/PolicyDocForm'
 import { ErrorBoundary } from '@/components/error/ErrorBoundary'
 import { ConfirmDiscardProvider } from '@/lib/confirm-discard-context'
 import { FormSkeleton } from '@/components/ui/skeleton-loader'
@@ -186,6 +187,7 @@ export default function Home() {
     'resignation_acceptance', 'relieving_letter', 'clearance_cert', 'fnf_settlement',
     'promotion_letter', 'pip_letter', 'appreciation_letter',
     'leave_approval', 'lwp_notice',
+    'hr_handbook', 'leave_policy',
   ] as const
 
   const isDocView = (ALL_DOC_TYPES as readonly string[]).includes(view)
@@ -279,6 +281,8 @@ export default function Home() {
                       {view === 'lwp_notice' && <LWPNoticeForm />}
                       {view === 'arrear_payment' && <ArrearPaymentForm />}
                       {view === 'probation_confirmation' && <ProbationConfirmationForm />}
+                      {view === 'hr_handbook' && <PolicyDocForm docType="hr_handbook" label="HR Handbook" description="Company HR policies & procedures" />}
+                      {view === 'leave_policy' && <PolicyDocForm docType="leave_policy" label="Leave Policy" description="Leave types & application rules" />}
                       {!(ALL_DOC_TYPES as readonly string[]).includes(view) && (
                         <ComingSoonForm label={(view as string).replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} />
                       )}

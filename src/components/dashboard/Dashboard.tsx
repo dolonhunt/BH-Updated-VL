@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { Users, FileText, UserPlus, List, LayoutDashboard, ArrowRight, Clock } from 'lucide-react'
+import { Users, FileText, UserPlus, List, LayoutDashboard, ArrowRight, Clock, Receipt, Award, BadgeCheck, Briefcase, ScrollText, FileWarning, UserCheck } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useAllEmployees } from '@/lib/use-employees'
 import { View, CATEGORIES } from '@/components/layout/Sidebar'
@@ -82,13 +82,43 @@ export function Dashboard({ onNavigate }: DashboardProps) {
 
         <div>
           <h2 className="text-lg font-semibold mb-3">Quick Actions</h2>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 mb-4">
             <Button onClick={() => onNavigate('employees')}>
               <UserPlus className="w-4 h-4 mr-2" /> Add Employee
             </Button>
             <Button variant="outline" onClick={() => onNavigate('employee_list')}>
               <List className="w-4 h-4 mr-2" /> View Employees
             </Button>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { key: 'payslip' as View, label: 'Pay Slip', icon: <Receipt className="w-4 h-4" />, desc: 'Monthly payslip' },
+              { key: 'appointment' as View, label: 'Appointment', icon: <Briefcase className="w-4 h-4" />, desc: 'Appointment letter' },
+              { key: 'salary_cert' as View, label: 'Salary Cert.', icon: <BadgeCheck className="w-4 h-4" />, desc: 'Salary certificate' },
+              { key: 'experience' as View, label: 'Experience', icon: <Award className="w-4 h-4" />, desc: 'Experience letter' },
+              { key: 'offer_letter' as View, label: 'Offer Letter', icon: <ScrollText className="w-4 h-4" />, desc: 'Job offer' },
+              { key: 'termination_letter' as View, label: 'Termination', icon: <FileWarning className="w-4 h-4" />, desc: 'Termination letter' },
+              { key: 'hr_handbook' as View, label: 'HR Handbook', icon: <FileText className="w-4 h-4" />, desc: 'Company policies' },
+              { key: 'official_pad' as View, label: 'Official Pad', icon: <UserCheck className="w-4 h-4" />, desc: 'Free-form letter' },
+            ].map((item, i) => (
+              <motion.button
+                key={item.key}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 * i }}
+                onClick={() => onNavigate(item.key)}
+                className="flex items-center gap-3 rounded-lg border bg-card p-3 text-left hover:bg-accent hover:border-brand-bg/30 transition-all group"
+              >
+                <div className="w-8 h-8 rounded-lg bg-brand-bg/10 flex items-center justify-center shrink-0">
+                  <div className="text-brand-bg">{item.icon}</div>
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium leading-tight">{item.label}</p>
+                  <p className="text-[10px] text-muted-foreground truncate">{item.desc}</p>
+                </div>
+                <ArrowRight className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity ml-auto shrink-0" />
+              </motion.button>
+            ))}
           </div>
         </div>
 

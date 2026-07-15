@@ -2,8 +2,10 @@
 import { LOGO_BASE64, FOOTER_PIN_BASE64 } from '@/lib/generated/assets'
 
 // Fallback to remote URLs if base64 is unavailable (e.g., during development)
-const LOGO_URL  = LOGO_BASE64 || 'https://i.postimg.cc/WzcZTHwj/Logo-nobg.png'
+const LOGO_URL  = LOGO_BASE64 || 'https://i.postimg.cc/Vk8rGFCM/Logo.png'
 const PIN_URL   = FOOTER_PIN_BASE64 || 'https://i.postimg.cc/3NjvRFtr/Location-Pin.png'
+const HEADER_IMG_URL = 'https://i.postimg.cc/8zhhz7dd/BH-header-(1).png'
+const FOOTER_IMG_URL = 'https://i.postimg.cc/qvL9SXDf/footer-trimmed.png'
 
 export const SHARED_DOC_CSS = `
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Oswald:wght@700&display=swap'); — disabled: html2canvas chokes on lab() color in Google Fonts CSS. Fonts loaded by the app shell anyway. */
@@ -799,35 +801,24 @@ export function HEADER_HTML(options: {
   logoUrl?: string;
   pinUrl?: string;
 } = {}): string {
-  const scale = options.logo_scale !== undefined ? Number(options.logo_scale) : 1.0
-  const alignment = options.logo_alignment || 'center'
-  const alignSelf = alignment === 'left' ? 'flex-start' : alignment === 'right' ? 'flex-end' : 'center'
-  const heightPx = 80 * scale
   const logoUrl = options.logoUrl || LOGO_URL
-  const pinUrl = options.pinUrl || PIN_URL
+  const headerUrl = HEADER_IMG_URL
 
   return `
-  <div class="pg-header" style="align-items: ${alignSelf};">
-    <img class="pg-logo" src="${logoUrl}" alt="logo" style="height: ${heightPx}px; align-self: ${alignSelf};"/>
-    <hr class="pg-rule-thick"/>
+  <div class="pg-header">
+    <img class="pg-header-img" src="${headerUrl}" alt="header" style="width: 100%; display: block;"/>
   </div>
   `
 }
 
 export function FOOTER_HTML(pageNum?: number, totalPages?: number, options: { pinUrl?: string; address?: string } = {}): string {
   const pageDisplay = (pageNum && totalPages) ? `Page ${pageNum} of ${totalPages}` : ''
-  const pinUrl = options.pinUrl || PIN_URL
-  const address = options.address || 'Eureka Kanon Villa, House-84, Level-3, Road-10/1, Block-D, Niketon, Gulshan-1, Dhaka-1212, Bangladesh.'
+  const footerUrl = FOOTER_IMG_URL
 
   return `
   <div class="pg-foot-wrap">
+    <img class="pg-footer-img" src="${footerUrl}" alt="footer" style="width: 100%; display: block;"/>
     <div class="pg-num">${pageDisplay}</div>
-    <hr class="pg-rule-thin"/>
-    <div class="pg-footer">
-      <img class="pg-pin" src="${pinUrl}" alt="pin"/>
-      <span class="pg-foot-label">OFFICE ADDRESS:</span>
-      <span class="pg-foot-addr">${address}</span>
-    </div>
   </div>
   `
 }

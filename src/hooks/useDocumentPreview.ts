@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, RefObject } from 'react'
 import { usePreviewData } from '@/lib/preview-store'
 import { getSettingsSnapshot } from '@/lib/settings-store'
+import { authHeaders } from '@/lib/api-client'
 import { toast } from 'sonner'
 import { addDocHistory } from '@/lib/doc-history'
 
@@ -41,7 +42,7 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
 
         const res = await fetch('/api/document', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', ...authHeaders() },
           body: JSON.stringify({
             type: preview.docType,
             data,
@@ -119,7 +120,7 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
       if (isComplex) {
         const res = await fetch('/api/generate-pdf', {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
+          headers: { 'Content-Type': 'text/plain', ...authHeaders() },
           body: htmlToUse,
         })
         if (!res.ok) {
@@ -186,7 +187,7 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
     try {
       const res = await fetch('/api/generate-docx', {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'text/plain', ...authHeaders() },
         body: htmlToUse,
       })
       
