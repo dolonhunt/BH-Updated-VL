@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 node_modules
 /.pnp
@@ -23,6 +21,9 @@ node_modules
 # misc
 .DS_Store
 *.pem
+Thumbs.db
+*.swp
+*.swo
 
 # debug
 npm-debug.log*
@@ -30,25 +31,63 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files
 .env*
+!.env.example
 
 # vercel
 .vercel
 
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-local-*
-.claude
-.z-ai-config
+
+# logs
 *.log
 dev.log
 dev.out.log
+
+# local config
+local-*
+.claude
+.z-ai-config
 test
 prompt
 
-server.log
-# Skills directory
+# agent workspace
+.agents/
 /skills/
+
+# database
+*.db
+*.sqlite
+db/
+
+# generated / stale assets
+public/*.docx
+public/*.pdf
+public/v1.01-backup.tar.gz
+public/logo.svg
+public/Logo-main.jpg
+public/letterhead-*
+
+# old version artifacts
+BH Office V1/
+docs/
+download/
+examples/
+lib/
+mini-services/
+tests/
+
+# standalone/legacy files
+Caddyfile
+ORIGINAL_REQUEST.md
+PROJECT.md
+worklog.md
+run-server.sh
+bun.lock
+
+# standalone scripts (not needed in repo)
+scripts/generate-appointment-docx.js
+scripts/generate-salary-cert-docx.js
