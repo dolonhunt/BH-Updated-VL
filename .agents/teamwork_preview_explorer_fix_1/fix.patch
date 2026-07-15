@@ -1,0 +1,74 @@
+diff --git a/src/components/forms/AppointmentForm.tsx b/src/components/forms/AppointmentForm.tsx
+index abcdef1..bcdefa2 100644
+--- a/src/components/forms/AppointmentForm.tsx
++++ b/src/components/forms/AppointmentForm.tsx
+@@ -154,7 +154,6 @@
+         <Button
+           onClick={handleSaveNewEmployee}
+-          className="w-full text-white font-semibold h-9"
+-          style={{ background: '#FF2109' }}
++          className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
+         >
+           Save as New Employee & Generate
+         </Button>
+       ) : (
+         <Button
+           onClick={handleGenerate}
+-          className="w-full text-white font-semibold h-9"
+-          style={{ background: '#FF2109' }}
++          className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
+         >
+           Generate Appointment Letter
+         </Button>
+diff --git a/src/components/forms/ExperienceForm.tsx b/src/components/forms/ExperienceForm.tsx
+index abcdef2..bcdefb2 100644
+--- a/src/components/forms/ExperienceForm.tsx
++++ b/src/components/forms/ExperienceForm.tsx
+@@ -111,3 +111,2 @@
+                 <Button
+                   onClick={handleGenerate}
+-                  className="w-full text-white font-semibold h-9"
+-                  style={{ background: '#FF2109' }}
++                  className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
+                 >
+                   Generate Experience Letter
+                 </Button>
+diff --git a/src/components/forms/EmploymentCertForm.tsx b/src/components/forms/EmploymentCertForm.tsx
+index abcdef3..bcdefc2 100644
+--- a/src/components/forms/EmploymentCertForm.tsx
++++ b/src/components/forms/EmploymentCertForm.tsx
+@@ -106,3 +106,2 @@
+                 <Button
+                   onClick={handleGenerate}
+-                  className="w-full text-white font-semibold h-9"
+-                  style={{ background: '#FF2109' }}
++                  className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
+                 >
+                   Generate Employment Certificate
+                 </Button>
+diff --git a/src/components/forms/PaySlipForm.tsx b/src/components/forms/PaySlipForm.tsx
+index abcdef4..bcdefd2 100644
+--- a/src/components/forms/PaySlipForm.tsx
++++ b/src/components/forms/PaySlipForm.tsx
+@@ -166,3 +166,2 @@
+                 <Button
+                   onClick={handleGenerate}
+-                  className="w-full text-white font-semibold h-9"
+-                  style={{ background: '#FF2109' }}
++                  className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
+                 >
+                   Generate Payslip
+                 </Button>
+diff --git/src/components/forms/SalaryCertForm.tsx b/src/components/forms/SalaryCertForm.tsx
+index abcdef5..bcdefe2 100644
+--- a/src/components/forms/SalaryCertForm.tsx
++++ b/src/components/forms/SalaryCertForm.tsx
+@@ -147,3 +147,2 @@
+                 <Button
+                   onClick={handleGenerate}
+-                  className="w-full text-white font-semibold h-9"
+-                  style={{ background: '#FF2109' }}
++                  className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
+                 >
+                   Generate Salary Certificate
+                 </Button>

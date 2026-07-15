@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id            String   @id @default(cuid())
+  name          String
+  designation   String   @default("")
+  department    String   @default("")
+  joining_date  String   @default("")
+  basic         Float    @default(0)
+  house_rent    Float    @default(0)
+  conveyance    Float    @default(0)
+  medical       Float    @default(0)
+  food_mobile   Float    @default(0)
+  cash          Float    @default(0)
+  gross         Float    @default(0)
+  tax           Float    @default(0)
+  net           Float    @default(0)
+  bank_account  String   @default("")
+  bank_name     String   @default("")
+  nid           String   @default("")
+  mobile        String   @default("")
+  email         String   @default("")
+  status        String   @default("active")
+  ref_code      String   @default("")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model CompanyConfig {
+  id                     String @id @default("default")
+  name                   String @default("Beyond Headlines")
+  address                String @default("Eureka Kanon Villa, House-84, Level-3, Road-10/1, Block-D, Niketon, Gulshan-1, Dhaka-1212, Bangladesh.")
+  phone                  String @default("")
+  email                  String @default("")
+  proprietor_name        String @default("Saqib Ahmed")
+  proprietor_designation String @default("Proprietor")
+  brand_color            String @default("#FF2109")
+  logo_path              String @default("/Logo-main.png")
+}

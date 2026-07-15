@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salary Certificate – Syed Ashfaqul Haque – The Beyond Headlines</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background: #d4d4d4;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 11px;
+      color: #111;
+    }
+
+    .page {
+      width: 794px;
+      height: 1123px;
+      background: #ffffff;
+      margin: 40px auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.22);
+      overflow: hidden;
+    }
+
+    /* ════════ HEADER ════════ */
+    .header {
+      width: 100%;
+      padding: 14px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      display: block;
+      height: 55px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-rule {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #FF2109;
+      border: none;
+      margin-top: 8px;
+    }
+
+    /* ════════ BODY ════════ */
+    .body {
+      flex: 1;
+      padding: 24px 50px 24px 50px;
+      overflow: hidden;
+    }
+
+    .cert-title {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    .ref-date {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      font-size: 11px;
+    }
+
+    .cert-body {
+      font-size: 11px;
+      line-height: 1.85;
+      text-align: justify;
+      margin-bottom: 18px;
+    }
+
+    .cert-body .emp-name {
+      font-weight: 700;
+    }
+
+    /* Detail rows */
+    .detail-row {
+      display: flex;
+      margin-bottom: 8px;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .detail-row .label {
+      width: 130px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .detail-row .value {
+      flex: 1;
+    }
+
+    /* Salary table */
+    .salary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5px;
+      margin: 16px 0;
+    }
+
+    .salary-table thead tr {
+      background: #FF2109;
+      color: #fff;
+    }
+
+    .salary-table thead th {
+      padding: 6px 10px;
+      text-align: left;
+      font-weight: 700;
+      border: 1px solid #7a1a34;
+    }
+
+    .salary-table thead th.right {
+      text-align: right;
+    }
+
+    .salary-table tbody td {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      vertical-align: middle;
+    }
+
+    .salary-table tbody tr:nth-child(even) {
+      background: #f9f0f2;
+    }
+
+    .salary-table td.right {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .salary-table td.bold {
+      font-weight: 700;
+    }
+
+    .salary-table .total-row {
+      background: #f0e0e4;
+    }
+
+    .salary-table .total-row td {
+      font-weight: 700;
+      border-top: 2px solid #FF2109;
+    }
+
+    .salary-table .net-row {
+      background: #FF2109;
+      color: #000;
+    }
+
+    .salary-table .net-row td {
+      font-weight: 700;
+      border-color: #7a1a34;
+    }
+
+    /* Annual section */
+    .annual-heading {
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 16px;
+      margin-bottom: 10px;
+    }
+
+    .annual-row {
+      display: flex;
+      margin-bottom: 5px;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .annual-row .label {
+      width: 260px;
+      flex-shrink: 0;
+    }
+
+    .annual-row .colon {
+      width: 20px;
+      flex-shrink: 0;
+    }
+
+    .annual-row .value {
+      flex: 1;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .annual-row.total-annual .label,
+    .annual-row.total-annual .value {
+      font-weight: 700;
+    }
+
+    .annual-divider {
+      border: none;
+      border-top: 1px solid #999;
+      margin: 8px 0;
+    }
+
+    /* Declaration */
+    .declaration {
+      font-size: 11px;
+      line-height: 1.75;
+      text-align: justify;
+      margin-top: 18px;
+      margin-bottom: 20px;
+    }
+
+    /* Signature section */
+    .sig-section {
+      margin-top: 30px;
+    }
+
+    .sig-block .sig-name {
+      font-size: 11px;
+      font-weight: 700;
+      border-top: 1.5px solid #333;
+      padding-top: 6px;
+      display: inline-block;
+    }
+
+    .sig-block .sig-title {
+      font-size: 10px;
+      color: #000;
+      line-height: 1.6;
+    }
+
+    /* ════════ FOOTER ════════ */
+    .footer {
+      background: #FF2109;
+      padding: 8px 20px 10px 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .footer-pin {
+      display: inline-block;
+      margin-bottom: 2px;
+      line-height: 1;
+    }
+
+    .footer-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.05em;
+      margin-bottom: 1px;
+    }
+
+    .footer-address {
+      font-size: 9px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    @media print {
+      html, body { background: #fff; }
+      .page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; page-break-after: always; }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <img class="logo-img" src="/Logo-main.png" alt="The Beyond Headlines" />
+    <hr class="header-rule" />
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <div class="cert-title">SALARY CERTIFICATE</div>
+
+    <div class="ref-date">
+      <span>Ref: TBH-46077</span>
+      <span>Date: February 24, 2026</span>
+    </div>
+
+    <div class="cert-body">
+      This is to certify that Mr. <span class="emp-name">Syed Ashfaqul Haque</span> has been working as a permanent employee in our organisation, The Beyond Headlines and, his contract excludes any retirement age limit. His employment details are as follows:
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Designation:</span>
+      <span class="value">Editor</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Joining date:</span>
+      <span class="value">October 01, 2025</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Job Location:</span>
+      <span class="value">Head Office, Dhaka</span>
+    </div>
+
+    <!-- Salary Table -->
+    <table class="salary-table">
+      <thead>
+        <tr>
+          <th style="width:38%">Monthly Gross Salary</th>
+          <th class="right" style="width:12%">(in BDT)</th>
+          <th style="width:38%">Monthly Deductions</th>
+          <th class="right" style="width:12%">(in BDT)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Basic</td>
+          <td class="right">150,000.00</td>
+          <td>Tax</td>
+          <td class="right">43,000.00</td>
+        </tr>
+        <tr>
+          <td>House Rent</td>
+          <td class="right">75,000.00</td>
+          <td>Others</td>
+          <td class="right">-</td>
+        </tr>
+        <tr>
+          <td>Conveyance</td>
+          <td class="right">30,000.00</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Medical Allowance</td>
+          <td class="right">22,500.00</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Food &amp; Mobile Allowances</td>
+          <td class="right">22,500.00</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Cash</td>
+          <td class="right">143,000.00</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="total-row">
+          <td class="bold">Total</td>
+          <td class="right bold">443,000.00</td>
+          <td class="bold">Total</td>
+          <td class="right bold">43,000.00</td>
+        </tr>
+        <tr class="net-row">
+          <td class="bold">Net Total</td>
+          <td class="right bold">400,000.00</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Annual Pay & Benefits -->
+    <div class="annual-heading">Annual Pay &amp; Benefits (in BDT)</div>
+
+    <div class="annual-row">
+      <span class="label">Salary &amp; Others Allowances</span>
+      <span class="colon">:</span>
+      <span class="value">5,316,000.00</span>
+    </div>
+
+    <div class="annual-row">
+      <span class="label">Festival Bonus(es)</span>
+      <span class="colon">:</span>
+      <span class="value">300,000.00</span>
+    </div>
+
+    <hr class="annual-divider" />
+
+    <div class="annual-row total-annual">
+      <span class="label">Total (Annually)</span>
+      <span class="colon">:</span>
+      <span class="value">5,616,000.00</span>
+    </div>
+
+    <!-- Declaration -->
+    <div class="declaration">
+      We hereby certify that the above-mentioned information is correct and accurate to the best of our knowledge. We are issuing this letter on the specific request of our employee for whatever the purpose he may require without accepting any liability on behalf of this letter or part of this letter on our company.
+    </div>
+
+    <!-- Signature Section -->
+    <div class="sig-section">
+      <div class="sig-block">
+        <div class="sig-name">Saqib Ahmed</div>
+        <div class="sig-title">
+          Proprietor<br>
+          Beyond Headlines
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-pin">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+      </svg>
+    </div>
+    <div class="footer-label">Office Address:</div>
+    <div class="footer-address">
+      Eureka Kanon Villa, House-84, Level-3, Road-10/1, Block-D,<br>
+      Niketon, Gulshan-1, Dhaka-1212, Bangladesh.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

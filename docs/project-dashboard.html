@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BH HR APP DOCUGEN - Project Dashboard</title>
+<style>
+  :root {
+    --brand-red: #FF2109;
+    --dark-navy: #0f172a;
+    --bg-slate: #f8fafc;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-slate);
+    color: #1e293b;
+    line-height: 1.6;
+  }
+  .header {
+    background: linear-gradient(135deg, var(--dark-navy) 0%, #1e293b 100%);
+    color: white;
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 4px solid var(--brand-red);
+  }
+  .header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .header p { opacity: 0.8; font-size: 0.95rem; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--brand-red);
+  }
+  .stat-card .label { font-size: 0.8rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-card .value { font-size: 1.75rem; font-weight: 700; margin-top: 0.25rem; }
+  .stat-card .sub { font-size: 0.85rem; color: #94a3b8; margin-top: 0.25rem; }
+  
+  .phases { display: flex; flex-direction: column; gap: 1.5rem; }
+  .phase {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .phase-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  .phase-header:hover { background: #f8fafc; }
+  .phase-title { display: flex; align-items: center; gap: 0.75rem; }
+  .phase-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .badge-active { background: #dbeafe; color: #1e40af; }
+  .badge-pending { background: #fef3c7; color: #92400e; }
+  .badge-done { background: #d1fae5; color: #065f46; }
+  .badge-blocked { background: #fee2e2; color: #991b1b; }
+  
+  .phase-name { font-weight: 600; font-size: 1.05rem; }
+  .phase-meta { font-size: 0.85rem; color: #64748b; }
+  .progress-bar {
+    width: 120px;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--brand-red);
+    transition: width 0.3s;
+  }
+  
+  .tasks { padding: 0; }
+  .task {
+    display: grid;
+    grid-template-columns: 40px 1fr 140px 100px 80px;
+    align-items: center;
+    padding: 0.85rem 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    gap: 1rem;
+  }
+  .task:last-child { border-bottom: none; }
+  .task:hover { background: #f8fafc; }
+  
+  .task-id {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #94a3b8;
+    font-family: 'Geist Mono', monospace;
+  }
+  .task-name { font-weight: 500; }
+  .task-desc { font-size: 0.8rem; color: #64748b; margin-top: 0.15rem; }
+  
+  .priority {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .p0 { background: #fee2e2; color: #991b1b; }
+  .p1 { background: #fef3c7; color: #92400e; }
+  .p2 { background: #e0e7ff; color: #3730a3; }
+  
+  .status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .status.pending { color: #94a3b8; }
+  .status.in-progress { color: #2563eb; }
+  .status.completed { color: #059669; }
+  .status.blocked { color: #dc2626; }
+  
+  .check {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: white;
+    transition: all 0.15s;
+  }
+  .check.done {
+    background: var(--success);
+    border-color: var(--success);
+  }
+  
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #0f172a;
+  }
+  .section { margin-bottom: 2.5rem; }
+  
+  .adr-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .adr-item {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .adr-num {
+    background: var(--dark-navy);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Geist Mono', monospace;
+  }
+  .adr-title { font-weight: 600; }
+  .adr-status {
+    margin-left: auto;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  
+  .collapsed .tasks { display: none; }
+  .collapsed .phase-header::after { content: ' ▼'; font-size: 0.7rem; }
+  .phase-header::after { content: ' ▼'; font-size: 0.7rem; color: #94a3b8; }
+  .expanded .phase-header::after { transform: rotate(180deg); }
+  
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #94a3b8;
+  }
+  .empty-state h3 { color: #64748b; margin-bottom: 0.5rem; }
+  
+  @media (max-width: 900px) {
+    .task { grid-template-columns: 30px 1fr 80px; }
+    .task-desc, .task .priority, .task .status { display: none; }
+    .container { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>BH HR APP DOCUGEN</h1>
+  <p>Project Status Dashboard — Modernization Plan & Progress Tracker</p>
+</div>
+
+<div class="container">
+  
+  <!-- Stats Overview -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="label">Total Tasks</div>
+      <div class="value" id="total-tasks">--</div>
+      <div class="sub">Across 5 phases</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Completed</div>
+      <div class="value" style="color: var(--success)" id="completed-tasks">0</div>
+      <div class="sub" id="completed-pct">0%</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">In Progress</div>
+      <div class="value" style="color: var(--info)" id="inprogress-tasks">0</div>
+      <div class="sub">Active work</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Pending</div>
+      <div class="value" style="color: var(--warning)" id="pending-tasks">0</div>
+      <div class="sub">Not started</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Blocked</div>
+      <div class="value" style="color: var(--danger)" id="blocked-tasks">0</div>
+      <div class="sub">Needs decision</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">ADRs</div>
+      <div class="value" id="adr-count">5</div>
+      <div class="sub">Decisions documented</div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background: #94a3b8"></div> Pending</div>
+    <div class="legend-item"><div class="legend-dot" style="background: #2563eb"></div> In Progress</div>
+    <div class="legend-item"><div class="legend-dot" style="background: #059669"></div> Completed</div>
+    <div class="legend-item"><div class="legend-dot" style="background: #dc2626"></div> Blocked</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--brand-red)"></div> P0 Critical</div>
+  </div>
+
+  <!-- Phases will be rendered by JS -->
+  <div class="phases" id="phases-container"></div>
+
+  <!-- ADRs Section -->
+  <div class="section">
+    <h2 class="section-title">Architecture Decision Records (ADRs)</h2>
+    <div class="adr-list" id="adr-container"></div>
+  </div>
+
+</div>
+
+<script>
+const DATA = {
+  phases: [
+    {
+      id: "phase-1",
+      name: "Phase 1: Document Engine Foundation",
+      badge: "done",
+      badgeText: "100%",
+      weeks: "Weeks 1-3",
+      tasks: [
+        { id: "1.1", name: "Unify pagination system", desc: "ResizeObserver + MutationObserver replacing JS DOM splitting + CSS page-break dual-mode", priority: "P0", status: "completed" },
+        { id: "1.2", name: "Fix overflow handling", desc: "overflow:hidden + max-height on .page, visual overflow indicator", priority: "P0", status: "completed" },
+        { id: "1.3", name: "Fix PDF image rendering", desc: "Embed logo as base64 data URI (assets.ts), hybrid html2pdf.js + puppeteer-core", priority: "P0", status: "completed" },
+        { id: "1.4", name: "Wire up real DOCX + PDF generation", desc: "Hybrid: html2pdf.js client-side simple, Puppeteer server-side complex, html-to-docx real .docx", priority: "P0", status: "completed" },
+        { id: "1.5", name: "Standardize print CSS", desc: "Unified print stylesheet, fixed header/footer positioning", priority: "P1", status: "completed" },
+        { id: "1.6", name: "Replace iframe polling", desc: "Remove setInterval(1000ms), use ResizeObserver on .pg-body", priority: "P1", status: "completed" },
+      ]
+    },
+    {
+      id: "phase-2",
+      name: "Phase 2: Standardize HR Document Templates",
+      badge: "done",
+      badgeText: "100%",
+      weeks: "Weeks 4-7",
+      tasks: [
+        { id: "2.1", name: "Template audit & field cleanup", desc: "Remove dead fields (probation_months, quotation_date → quotation_date_dead, vendor_phone → vendor_cell)", priority: "P0", status: "completed" },
+        { id: "2.2", name: "Unified letterhead system", desc: "FOOTER_HTML() accepts address from DB, all 14 templates wired, live CSS matched", priority: "P0", status: "completed" },
+        { id: "2.3", name: "Standardize all 14 templates", desc: "All templates use HEADER_HTML, FOOTER_HTML with DB address, PAGINATION_SCRIPT — 14/14 wired", priority: "P0", status: "completed" },
+        { id: "2.4", name: "Activate 5 orphan templates", desc: "Offer Letter, NDA, Joining Report, ID Card, Personal Info — forms + sidebar + routes wired", priority: "P1", status: "completed" },
+        { id: "2.5", name: "Add template presets", desc: "Preset selector: Standard / Executive Appointment with prefilled salary values", priority: "P1", status: "completed" },
+        { id: "2.6", name: "Clean official pad", desc: "Blank body, matched live site CSS (Times New Roman, Poppins footer, correct logo/pin)", priority: "P1", status: "completed" },
+      ]
+    },
+    {
+      id: "phase-3",
+      name: "Phase 3: Enhanced UX & Interactions",
+      badge: "in-progress",
+      badgeText: "3/6",
+      weeks: "Weeks 8-10",
+      tasks: [
+        { id: "3.1", name: "Replace window.confirm() dialogs", desc: "2 remaining in useDocumentForm.ts:71,86 — need shadcn AlertDialog", priority: "P0", status: "pending" },
+        { id: "3.2", name: "Add command palette (Cmd+K)", desc: "cmdk-based CommandPalette with Navigation + all doc types + Escape to close", priority: "P0", status: "completed" },
+        { id: "3.3", name: "Real-time validation", desc: "onGenerate validation done (validateRequiredFields). Needs blur-based + debounced 300ms", priority: "P1", status: "in-progress" },
+        { id: "3.4", name: "Document history dashboard", desc: "localStorage log + Dashboard recent docs. Needs full-text search, filter by type/date", priority: "P1", status: "in-progress" },
+        { id: "3.5", name: "Keyboard shortcuts", desc: "Cmd+K done. Need: Cmd+P Print, Cmd+S, Cmd+E PDF, Cmd+Z, Cmd+F", priority: "P1", status: "in-progress" },
+        { id: "3.6", name: "Onboarding tour", desc: "First-visit guided tour, progressive disclosure for advanced features", priority: "P2", status: "pending" },
+      ]
+    },
+    {
+      id: "phase-4",
+      name: "Phase 4: New Features",
+      badge: "in-progress",
+      badgeText: "2/6",
+      weeks: "Weeks 11-12",
+      tasks: [
+        { id: "4.1", name: "Bulk operations", desc: "Employee: bulk delete, status change, export. Documents: batch generate", priority: "P1", status: "pending" },
+        { id: "4.2", name: "Document approval workflow", desc: "Draft / Pending / Approved / Rejected status, approver review", priority: "P1", status: "pending" },
+        { id: "4.3", name: "Email integration", desc: "mailto: dialog added. Needs real SMTP/Nodemailer backend", priority: "P1", status: "in-progress" },
+        { id: "4.4", name: "Dashboard / Home page", desc: "Stats (employees, doc types, today count), quick actions, recent docs, doc type grid", priority: "P0", status: "completed" },
+        { id: "4.5", name: "Employee documents tab", desc: "Per-employee doc history from localStorage, one-click Regenerate → doc type", priority: "P1", status: "completed" },
+        { id: "4.6", name: "Template gallery", desc: "Browse pre-built template variants, import community templates", priority: "P2", status: "pending" },
+      ]
+    },
+    {
+      id: "phase-5",
+      name: "Phase 5: Project Governance & Infrastructure",
+      badge: "pending",
+      badgeText: "0/6",
+      weeks: "Weeks 13-14",
+      tasks: [
+        { id: "5.1", name: "Standardize folder structure", desc: "features/ + shared/ + documents/ reorganization, migration guide", priority: "P0", status: "pending" },
+        { id: "5.2", name: "Structured logging", desc: "Pino logger, JSON output, log levels, key events tracking", priority: "P0", status: "pending" },
+        { id: "5.3", name: "Architecture Decision Records", desc: "docs/adr/ — initial ADRs for template registry, editor approach, pagination", priority: "P0", status: "pending" },
+        { id: "5.4", name: "Project status dashboard", desc: "This HTML file — auto-tracked via localStorage. Needs README badge", priority: "P1", status: "in-progress" },
+        { id: "5.5", name: "Error tracking & monitoring", desc: "Sentry integration for API failures, template errors, PDF timeouts", priority: "P1", status: "pending" },
+        { id: "5.6", name: "Integration tests", desc: "Per-document-type test: render → PDF → DOCX → verify fields. CI pipeline.", priority: "P1", status: "pending" },
+      ]
+    }
+  ],
+  adrs: [
+    { id: "ADR-001", title: "Template Engine: Registry Pattern", status: "proposed", date: "2026-06-23" },
+    { id: "ADR-002", title: "Editor Approach: Keep iframe, plan TipTap migration", status: "proposed", date: "2026-06-23" },
+    { id: "ADR-003", title: "Pagination: Single reactive system (ResizeObserver)", status: "proposed", date: "2026-06-23" },
+    { id: "ADR-004", title: "DOCX: Use docx library for true .docx binary", status: "proposed", date: "2026-06-23" },
+    { id: "ADR-005", title: "State: React Query (server) + Zustand (client UI)", status: "proposed", date: "2026-06-23" },
+  ]
+};
+
+function renderDashboard() {
+  const container = document.getElementById('phases-container');
+  container.innerHTML = '';
+  
+  let totalTasks = 0, completed = 0, inProgress = 0, pending = 0, blocked = 0;
+  
+  DATA.phases.forEach(phase => {
+    const phaseEl = document.createElement('div');
+    phaseEl.className = 'phase expanded';
+    phaseEl.id = phase.id;
+    
+    const phaseTotal = phase.tasks.length;
+    const phaseCompleted = phase.tasks.filter(t => t.status === 'completed').length;
+    const phasePct = Math.round((phaseCompleted / phaseTotal) * 100);
+    
+    totalTasks += phaseTotal;
+    phase.tasks.forEach(t => {
+      if (t.status === 'completed') completed++;
+      else if (t.status === 'in-progress') inProgress++;
+      else if (t.status === 'blocked') blocked++;
+      else pending++;
+    });
+    
+    let tasksHTML = phase.tasks.map(task => {
+      const isDone = task.status === 'completed';
+      return `
+        <div class="task" data-task="${task.id}">
+          <div class="check ${isDone ? 'done' : ''}" onclick="toggleTask('${phase.id}', '${task.id}')">${isDone ? '✓' : ''}</div>
+          <div>
+            <div class="task-name">${task.name}</div>
+            <div class="task-desc">${task.desc}</div>
+          </div>
+          <div><span class="priority ${task.priority.toLowerCase()}">${task.priority}</span></div>
+          <div class="status ${task.status}">${task.status.replace('-', ' ')}</div>
+        </div>
+      `;
+    }).join('');
+    
+    phaseEl.innerHTML = `
+      <div class="phase-header" onclick="togglePhase('${phase.id}')">
+        <div class="phase-title">
+          <span class="phase-badge badge-${phase.badge}">${phase.badgeText}</span>
+          <div>
+            <div class="phase-name">${phase.name}</div>
+            <div class="phase-meta">${phase.weeks} · ${phaseCompleted}/${phaseTotal} tasks · ${phasePct}%</div>
+          </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width: ${phasePct}%"></div></div>
+      </div>
+      <div class="tasks">${tasksHTML}</div>
+    `;
+    
+    container.appendChild(phaseEl);
+  });
+  
+  document.getElementById('total-tasks').textContent = totalTasks;
+  document.getElementById('completed-tasks').textContent = completed;
+  document.getElementById('completed-pct').textContent = Math.round((completed/totalTasks)*100) + '%';
+  document.getElementById('inprogress-tasks').textContent = inProgress;
+  document.getElementById('pending-tasks').textContent = pending;
+  document.getElementById('blocked-tasks').textContent = blocked;
+  
+  // ADRs
+  const adrContainer = document.getElementById('adr-container');
+  adrContainer.innerHTML = DATA.adrs.map(adr => `
+    <div class="adr-item">
+      <span class="adr-num">${adr.id}</span>
+      <span class="adr-title">${adr.title}</span>
+      <span class="adr-status" style="color: var(--info)">${adr.status}</span>
+      <span style="font-size: 0.8rem; color: #94a3b8">${adr.date}</span>
+    </div>
+  `).join('');
+}
+
+function togglePhase(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('collapsed');
+  el.classList.toggle('expanded');
+}
+
+function toggleTask(phaseId, taskId) {
+  const phase = DATA.phases.find(p => p.id === phaseId);
+  const task = phase.tasks.find(t => t.id === taskId);
+  
+  if (task.status === 'pending') task.status = 'in-progress';
+  else if (task.status === 'in-progress') task.status = 'completed';
+  else if (task.status === 'completed') task.status = 'pending';
+  
+  renderDashboard();
+  saveState();
+}
+
+function saveState() {
+  localStorage.setItem('dashboard-state', JSON.stringify(DATA));
+}
+
+function loadState() {
+  const saved = localStorage.getItem('dashboard-state');
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    DATA.phases = parsed.phases;
+    DATA.adrs = parsed.adrs;
+  }
+}
+
+loadState();
+renderDashboard();
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BH HR DocuGen – Project Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #22c55e;
+      --yellow: #eab308;
+      --red: #ef4444;
+      --purple: #a855f7;
+      --orange: #f97316;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1.75rem; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+    h1 small { font-size: 0.85rem; color: var(--muted); font-weight: 400; }
+    .subtitle { color: var(--muted); margin-bottom: 28px; font-size: 0.9rem; }
+    h2 { font-size: 1.15rem; margin: 28px 0 12px; color: var(--accent); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .card-title { font-weight: 600; font-size: 0.9rem; }
+    .meta { font-size: 0.75rem; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; }
+    .badge { font-size: 0.7rem; padding: 1px 7px; border-radius: 10px; font-weight: 500; }
+    .badge.done { background: #22c55e33; color: #4ade80; }
+    .badge.wip { background: #eab30833; color: #facc15; }
+    .badge.todo { background: #334155; color: #94a3b8; }
+    .file-list { margin-top: 8px; font-size: 0.75rem; display: flex; flex-direction: column; gap: 2px; }
+    .file-list a { color: var(--muted); text-decoration: none; }
+    .file-list a:hover { color: var(--accent); }
+    .category { font-weight: 400; font-size: 0.75rem; color: var(--purple); }
+  </style>
+</head>
+<body>
+  <h1>BH HR DocuGen <small>v2.0</small></h1>
+  <p class="subtitle">Project Dashboard — 25 Jun 2026</p>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 1 — ENGINE                                             -->
+  <!-- ============================================================ -->
+  <h2>🛠️ Phase 1 — Engine <span class="badge done">6/6</span></h2>
+  <div class="grid">
+    <div class="card"><div class="card-header"><span class="card-title">Next.js routing + layout</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">Template renderer (iframe)</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">Employee store (localStorage)</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">Canvas editor (ZoomPan, ruler)</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">Preview store (form → canvas)</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">Font/theme system</span><span class="badge done">Done</span></div></div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 2 — TEMPLATES (All 34 Built & Wired)                  -->
+  <!-- ============================================================ -->
+  <h2>📄 Phase 2 — Templates <span class="badge done">34/34</span></h2>
+  <div class="grid">
+    <div class="card"><div class="card-header"><span class="card-title">Offer Letter</span><span class="badge done">✅</span></div><span class="category">Hiring</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Appointment Letter</span><span class="badge done">✅</span></div><span class="category">Hiring</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Joining Report</span><span class="badge done">✅</span></div><span class="category">Hiring</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">ID Card Form</span><span class="badge done">✅</span></div><span class="category">Hiring</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">NDA</span><span class="badge done">✅</span></div><span class="category">Hiring</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Personal Info Form</span><span class="badge done">✅</span></div><span class="category">Hiring</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Probation Confirmation</span><span class="badge done">✅</span></div><span class="category">Hiring</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Employment Cert</span><span class="badge done">✅</span></div><span class="category">Employment Proof</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Salary Cert</span><span class="badge done">✅</span></div><span class="category">Employment Proof</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">NOC Letter</span><span class="badge done">✅</span></div><span class="category">Employment Proof</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Bank Introduction</span><span class="badge done">✅</span></div><span class="category">Employment Proof</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Embassy Support</span><span class="badge done">✅</span></div><span class="category">Employment Proof</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Pay Slip</span><span class="badge done">✅</span></div><span class="category">Payroll</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Salary Increment</span><span class="badge done">✅</span></div><span class="category">Payroll</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Bonus Letter</span><span class="badge done">✅</span></div><span class="category">Payroll</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Arrear Payment</span><span class="badge done">✅</span></div><span class="category">Payroll</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Show Cause Notice</span><span class="badge done">✅</span></div><span class="category">Disciplinary</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Warning Letter</span><span class="badge done">✅</span></div><span class="category">Disciplinary</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Suspension Letter</span><span class="badge done">✅</span></div><span class="category">Disciplinary</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Termination Letter</span><span class="badge done">✅</span></div><span class="category">Disciplinary</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Experience Letter</span><span class="badge done">✅</span></div><span class="category">Separation</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Relieving Letter</span><span class="badge done">✅</span></div><span class="category">Separation</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Resignation Acceptance</span><span class="badge done">✅</span></div><span class="category">Separation</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Clearance Cert</span><span class="badge done">✅</span></div><span class="category">Separation</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">F&F Settlement</span><span class="badge done">✅</span></div><span class="category">Separation</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Promotion Letter</span><span class="badge done">✅</span></div><span class="category">Performance</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">PIP Letter</span><span class="badge done">✅</span></div><span class="category">Performance</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Appreciation Letter</span><span class="badge done">✅</span></div><span class="category">Performance</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Leave Approval</span><span class="badge done">✅</span></div><span class="category">Leave &amp; Attendance</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">LWP Notice</span><span class="badge done">✅</span></div><span class="category">Leave &amp; Attendance</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Official Pad</span><span class="badge done">✅</span></div><span class="category">Custom</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Work Order</span><span class="badge done">✅</span></div><span class="category">Custom</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Purchase Order</span><span class="badge done">✅</span></div><span class="category">Custom</span></div>
+    <div class="card"><div class="card-header"><span class="card-title">Requisition</span><span class="badge done">✅</span></div><span class="category">Custom</span></div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 3 — UX                                                -->
+  <!-- ============================================================ -->
+  <h2>✨ Phase 3 — UX <span class="badge done">6/6</span></h2>
+  <div class="grid">
+    <div class="card"><div class="card-header"><span class="card-title">3.1 ConfirmDiscard dialog</span><span class="badge done">Done</span></div><div class="meta">window.confirm → AlertDialog + context</div></div>
+    <div class="card"><div class="card-header"><span class="card-title">3.2 Cmd+K palette</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">3.3 Form validation</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">3.4 Keyboard shortcuts</span><span class="badge done">Done</span></div><div class="meta">Ctrl+Enter generate, Ctrl+Z undo/redo</div></div>
+    <div class="card"><div class="card-header"><span class="card-title">3.5 Doc history</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">3.6 Preview zoom presets</span><span class="badge done">Done</span></div><div class="meta">W / H / 1:1 pill buttons</div></div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 4 — FEATURES                                          -->
+  <!-- ============================================================ -->
+  <h2>🚀 Phase 4 — Features <span class="badge done">6/6</span></h2>
+  <div class="grid">
+    <div class="card"><div class="card-header"><span class="card-title">4.1 Dashboard home</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">4.2 Employee management</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">4.3 Email dialog</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">4.4 Fullscreen preview</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">4.5 Employee docs tab</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">4.6 Doc types</span><span class="badge done">34/34 built</span></div><div class="meta">8 categories, all live</div></div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 5 — INFRA                                             -->
+  <!-- ============================================================ -->
+  <h2>🧱 Phase 5 — Infra <span class="badge done">6/6</span></h2>
+  <div class="grid">
+    <div class="card"><div class="card-header"><span class="card-title">5.1 Print / PDF export</span><span class="badge done">Done</span></div><div class="meta">Reliable print + TXT download</div></div>
+    <div class="card"><div class="card-header"><span class="card-title">5.2 Doc versioning</span><span class="badge done">Done</span></div><div class="meta">localStorage snapshots, restore/delete</div></div>
+    <div class="card"><div class="card-header"><span class="card-title">5.3 Template admin UI</span><span class="badge done">Done</span></div><div class="meta">Registry browser, HTML viewer, variable extractor</div></div>
+    <div class="card"><div class="card-header"><span class="card-title">5.4 Search / filter</span><span class="badge done">Done</span></div><div class="meta">Sidebar search input filters by label/desc</div></div>
+    <div class="card"><div class="card-header"><span class="card-title">5.5 Loading skeletons</span><span class="badge done">Done</span></div></div>
+    <div class="card"><div class="card-header"><span class="card-title">5.6 Error boundaries</span><span class="badge done">Done</span></div><div class="meta">4 sections wrapped with ErrorBoundary</div></div>
+  </div>
+
+  <p class="subtitle" style="margin-top: 32px;">
+    Overall: <strong>30/30</strong> tasks · <strong>34/34</strong> doc types built · All phases complete 🎉 · Last updated: 25 Jun 2026
+  </p>
+</body>
+</html>

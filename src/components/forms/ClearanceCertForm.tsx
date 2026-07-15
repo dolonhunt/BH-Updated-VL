@@ -1,0 +1,170 @@
+'use client'
+
+import { useDocumentForm } from '@/hooks/useDocumentForm'
+import { EmployeeSelect } from './EmployeeSelect'
+import { FormField } from './FormField'
+import { MismatchModal } from './MismatchModal'
+import { Separator } from '@/components/ui/separator'
+import { Button } from '@/components/ui/button'
+import type { Employee } from '@/lib/storage'
+import { calculateDuration } from '@/lib/calculations'
+import { validateRequiredFields } from '@/lib/validate'
+
+interface ClearanceCertFormData {
+  name: string
+  designation: string
+  department: string
+  ref_code: string
+  joining_date: string
+  leaving_date: string
+  date: string
+  duration: string
+  hr_clearance: string
+  hr_remarks: string
+  finance_clearance: string
+  finance_remarks: string
+  it_clearance: string
+  it_remarks: string
+  admin_clearance: string
+  admin_remarks: string
+}
+
+const initialData: ClearanceCertFormData = {
+  name: '',
+  designation: '',
+  department: '',
+  ref_code: '',
+  joining_date: '',
+  leaving_date: '',
+  date: new Date().toISOString().slice(0, 10),
+  duration: '',
+  hr_clearance: 'Yes',
+  hr_remarks: 'No dues',
+  finance_clearance: 'Yes',
+  finance_remarks: 'Settled',
+  it_clearance: 'Yes',
+  it_remarks: 'Assets returned',
+  admin_clearance: 'Yes',
+  admin_remarks: 'All clear',
+}
+
+function mapEmployeeToForm(emp: Employee): Partial<ClearanceCertFormData> {
+  return {
+    name: emp.name,
+    designation: emp.designation,
+    department: emp.department,
+    ref_code: emp.ref_code,
+    joining_date: emp.joining_date,
+  }
+}
+
+function onCalculate(data: ClearanceCertFormData): Partial<ClearanceCertFormData> {
+  const duration = calculateDuration(data.joining_date, data.leaving_date)
+  return { duration }
+}
+
+export function ClearanceCertForm() {
+  const {
+    formData, setField,
+    selectedEmployeeId, handleEmployeeChange,
+    employees,
+    mismatches, showMismatchModal, setShowMismatchModal,
+    handleGenerate, handleMismatchAction,
+    generated, errors,
+  } = useDocumentForm({
+    docType: 'clearance_cert',
+    initialData,
+    mapEmployeeToForm,
+    onCalculate,
+    validate: (d) => validateRequiredFields(d, {
+      name: { required: true, label: 'Name' },
+      designation: { required: true, label: 'Designation' },
+      department: { required: true, label: 'Department' },
+      joining_date: { required: true, label: 'Joining date' },
+      leaving_date: { required: true, label: 'Leaving date' },
+    }),
+  })
+
+  const showFields = selectedEmployeeId && selectedEmployeeId !== '__new__'
+
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex-1 overflow-y-auto">
+        <div className="p-4 space-y-4">
+          <EmployeeSelect
+            employees={employees}
+            value={selectedEmployeeId}
+            onChange={handleEmployeeChange}
+          />
+
+          {selectedEmployeeId === '__new__' && (
+            <div className="text-center text-xs text-gray-500 p-3 bg-gray-50 rounded-lg border border-gray-200">
+              Please add employee first
+            </div>
+          )}
+
+          {showFields && (
+            <>
+              <Separator />
+              <div className="space-y-3">
+                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Employee Info</h4>
+                <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+                  <FormField label="Name" value={formData.name} onChange={v => setField('name', v)} error={errors.name} />
+                  <FormField label="Designation" value={formData.designation} onChange={v => setField('designation', v)} error={errors.designation} />
+                  <FormField label="Department" value={formData.department} onChange={v => setField('department', v)} error={errors.department} />
+                  <FormField label="Ref Code" value={formData.ref_code} onChange={v => setField('ref_code', v)} />
+                </div>
+              </div>
+
+              <Separator />
+              <div className="space-y-3">
+                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Dates</h4>
+                <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+                  <FormField label="Joining Date" type="date" value={formData.joining_date} onChange={v => setField('joining_date', v)} error={errors.joining_date} />
+                  <FormField label="Leaving Date" type="date" value={formData.leaving_date} onChange={v => setField('leaving_date', v)} error={errors.leaving_date} />
+                  <FormField label="Certificate Date" type="date" value={formData.date} onChange={v => setField('date', v)} />
+                  <FormField label="Duration" value={formData.duration} onChange={() => {}} readOnly />
+                </div>
+              </div>
+
+              <Separator />
+              <div className="space-y-3">
+                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Department Clearances</h4>
+                <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+                  <FormField label="HR Status" value={formData.hr_clearance} onChange={v => setField('hr_clearance', v)} />
+                  <FormField label="HR Remarks" value={formData.hr_remarks} onChange={v => setField('hr_remarks', v)} />
+                  <FormField label="Finance Status" value={formData.finance_clearance} onChange={v => setField('finance_clearance', v)} />
+                  <FormField label="Finance Remarks" value={formData.finance_remarks} onChange={v => setField('finance_remarks', v)} />
+                  <FormField label="IT Status" value={formData.it_clearance} onChange={v => setField('it_clearance', v)} />
+                  <FormField label="IT Remarks" value={formData.it_remarks} onChange={v => setField('it_remarks', v)} />
+                  <FormField label="Admin Status" value={formData.admin_clearance} onChange={v => setField('admin_clearance', v)} />
+                  <FormField label="Admin Remarks" value={formData.admin_remarks} onChange={v => setField('admin_remarks', v)} />
+                </div>
+              </div>
+
+              {generated ? (
+                <div className="text-center text-xs text-emerald-600 font-medium p-3 bg-emerald-50 rounded-lg border border-emerald-200">
+                  ✓ Clearance Certificate generated. See live preview →
+                </div>
+              ) : (
+                <Button
+                  onClick={handleGenerate}
+                  className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
+                >
+                  Generate Clearance Certificate
+                </Button>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+
+      <MismatchModal
+        open={showMismatchModal}
+        onClose={() => setShowMismatchModal(false)}
+        mismatches={mismatches}
+        onAction={handleMismatchAction}
+      />
+    </div>
+  )
+}

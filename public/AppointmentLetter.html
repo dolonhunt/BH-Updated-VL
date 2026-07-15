@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Letter of Appointment – The Beyond Headlines</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background: #d4d4d4;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 11px;
+      color: #111;
+    }
+
+    .page {
+      width: 794px;
+      height: 1123px;
+      background: #ffffff;
+      margin: 40px auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.22);
+      overflow: hidden;
+    }
+
+    /* ════════ HEADER ════════ */
+    .header {
+      width: 100%;
+      padding: 14px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      display: block;
+      height: 55px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-rule {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #FF2109;
+      border: none;
+      margin-top: 8px;
+    }
+
+    /* ════════ BODY ════════ */
+    .body {
+      flex: 1;
+      padding: 24px 50px 24px 50px;
+      overflow: hidden;
+    }
+
+    .date {
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      text-align: right;
+    }
+
+    .to-block {
+      margin-bottom: 16px;
+      line-height: 1.7;
+      font-size: 11px;
+    }
+
+    .to-block strong {
+      font-weight: 700;
+    }
+
+    .subject {
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .salutation {
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .body-text {
+      font-size: 11px;
+      line-height: 1.75;
+      text-align: justify;
+      margin-bottom: 14px;
+    }
+
+    .expect-list {
+      font-size: 11px;
+      line-height: 1.75;
+      margin-bottom: 14px;
+      padding-left: 20px;
+    }
+
+    .expect-list li {
+      margin-bottom: 6px;
+      list-style-type: disc;
+    }
+
+    .salary-text {
+      font-size: 11px;
+      line-height: 1.75;
+      text-align: justify;
+      margin-bottom: 14px;
+    }
+
+    /* Salary table */
+    .salary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5px;
+      margin-bottom: 14px;
+    }
+
+    .salary-table thead tr {
+      background: #FF2109;
+      color: #fff;
+    }
+
+    .salary-table thead th {
+      padding: 6px 10px;
+      text-align: left;
+      font-weight: 700;
+      border: 1px solid #7a1a34;
+    }
+
+    .salary-table thead th.right {
+      text-align: right;
+    }
+
+    .salary-table tbody td {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      vertical-align: middle;
+    }
+
+    .salary-table tbody tr:nth-child(even) {
+      background: #f9f0f2;
+    }
+
+    .salary-table td.right {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .salary-table td.bold {
+      font-weight: 700;
+    }
+
+    .salary-table .net-row {
+      background: #FF2109;
+      color: #000;
+    }
+
+    .salary-table .net-row td {
+      border-color: #7a1a34;
+      color: #000;
+    }
+
+    .net-salary-note {
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .closing-text {
+      font-size: 11px;
+      line-height: 1.75;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    /* Signature section */
+    .sig-section {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .sig-block {
+      flex: 1;
+    }
+
+    .sig-block .sig-heading {
+      font-size: 11px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 70px;
+    }
+
+    .sig-block .sig-name {
+      font-size: 11px;
+      font-weight: 700;
+      border-top: 1.5px solid #333;
+      padding-top: 6px;
+    }
+
+    .sig-block .sig-title {
+      font-size: 10px;
+      color: #000;
+      line-height: 1.6;
+    }
+
+    .sig-block .sig-date {
+      font-size: 10px;
+      color: #000;
+      margin-top: 8px;
+    }
+
+    /* ════════ FOOTER ════════ */
+    .footer {
+      background: #FF2109;
+      padding: 8px 20px 10px 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .footer-pin {
+      display: inline-block;
+      margin-bottom: 2px;
+      line-height: 1;
+    }
+
+    .footer-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.05em;
+      margin-bottom: 1px;
+    }
+
+    .footer-address {
+      font-size: 9px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    @media print {
+      html, body { background: #fff; }
+      .page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; page-break-after: always; }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ PAGE 1 ════════════════ -->
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <img class="logo-img" src="/Logo-main.png" alt="The Beyond Headlines" />
+    <hr class="header-rule" />
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <div class="date">Date: 22nd September, 2025</div>
+
+    <div class="to-block">
+      <strong>To,</strong><br>
+      Mr. Syed Ashfaqul Haque<br>
+      Former Executive Editor,<br>
+      The Daily Star
+    </div>
+
+    <div class="subject">Subject: A letter of appointment</div>
+
+    <div class="salutation">Dear Mr. Haque,</div>
+
+    <div class="body-text">
+      On behalf of the 'Beyond Headlines', I, Saqib Ahmed, am pleased to appoint you as the Editor of Beyond Headlines; a digital news portal with a vision for an English-language newspaper in the future ahead. The management is hereby giving you the responsibility to turn BH into an independent, credible and free media. The performance of the portal and your stewardship will be reviewed by February, 2026 in order to decide on the future the contract.
+    </div>
+
+    <div class="body-text">As the Editor, you will be broadly expected to:</div>
+
+    <ul class="expect-list">
+      <li>Execute editorial and all other policies as approved by the owner.</li>
+      <li>Ensure neutrality, accountability and transparency in all aspects of media operations.</li>
+      <li>Exercise your complete authority in hiring and firing of the manpower under you with utmost fairness. In case of the recruitment and retrenchment of top-level manpower like Managing Editor, Executive Editor or other HODs, you will consult with the management/owner beforehand.</li>
+      <li>Run the media in light of the approved AOP and SOP.</li>
+    </ul>
+
+    <div class="salary-text">
+      As the editor, your take-home salary will be Tk. 4 lakh a month, and the income tax will be borne by the company. In addition to your monthly salary, you will be entitled to additional allowances as per the company policy.
+    </div>
+
+    <div class="salary-text">
+      It may be added that the tenure of this letter will be effective from the 1st of October, 2025 and all other terms and policies of your Employment will be mentioned in detail, in the formal agreement.
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-pin">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+      </svg>
+    </div>
+    <div class="footer-label">Office Address:</div>
+    <div class="footer-address">
+      Eureka Kanon Villa, House-84, Level-3, Road-10/1, Block-D,<br>
+      Niketon, Gulshan-1, Dhaka-1212, Bangladesh.
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════ PAGE 2 ════════════════ -->
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <img class="logo-img" src="/Logo-main.png" alt="The Beyond Headlines" />
+    <hr class="header-rule" />
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <div class="body-text"><strong>Your salary structure will be as follows:</strong></div>
+
+    <table class="salary-table">
+      <thead>
+        <tr>
+          <th style="width:60%">Description</th>
+          <th class="right" style="width:40%">Amount (BDT)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bank Deposit</td>
+          <td class="right">3,00,000</td>
+        </tr>
+        <tr>
+          <td>(Cash)</td>
+          <td class="right">1,43,000</td>
+        </tr>
+        <tr>
+          <td>Basic 50%</td>
+          <td class="right">1,50,000</td>
+        </tr>
+        <tr>
+          <td>House Rent @25%</td>
+          <td class="right">75,000</td>
+        </tr>
+        <tr>
+          <td>Conveyance @10%</td>
+          <td class="right">30,000</td>
+        </tr>
+        <tr>
+          <td>Medical Allowance @7.5%</td>
+          <td class="right">22,500</td>
+        </tr>
+        <tr>
+          <td>Other Allowances @7.5%</td>
+          <td class="right">22,500</td>
+        </tr>
+        <tr>
+          <td>Before AIT</td>
+          <td class="right">3,00,000</td>
+        </tr>
+        <tr>
+          <td class="bold" style="text-align:right">AIT</td>
+          <td class="right">43,000</td>
+        </tr>
+        <tr class="net-row">
+          <td class="bold" style="text-align:right">NET Deposit after AIT Deduction</td>
+          <td class="right">2,57,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="net-salary-note">NET Salary [Bank + Cash] = 4,00,000</div>
+
+    <div class="closing-text">
+      Please sign a copy of this letter in acknowledgement of this understanding. Kindly note that this Employment Letter is subject to the signing of the Agreement to be signed between you and the proprietor of BH.
+    </div>
+
+    <!-- Signature Section - empty for fill-up -->
+    <div class="sig-section">
+      <div class="sig-block">
+        <div class="sig-heading">Sincerely yours</div>
+        <div class="sig-name">&nbsp;</div>
+        <div class="sig-title">
+          Saqib Ahmed<br>
+          Proprietor<br>
+          Beyond Headlines<br>
+          House 5, Road 2,<br>
+          4th Floor, Gulshan 1<br>
+          Dhaka 1212
+        </div>
+      </div>
+      <div class="sig-block" style="text-align: right;">
+        <div class="sig-heading">Accepted</div>
+        <div class="sig-name">&nbsp;</div>
+        <div class="sig-title">
+          Syed Ashfaqul Haque<br>
+          On Date: 30th September 2025
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-pin">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+      </svg>
+    </div>
+    <div class="footer-label">Office Address:</div>
+    <div class="footer-address">
+      Eureka Kanon Villa, House-84, Level-3, Road-10/1, Block-D,<br>
+      Niketon, Gulshan-1, Dhaka-1212, Bangladesh.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

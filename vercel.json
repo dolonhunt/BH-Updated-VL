@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "bun run generate-assets && prisma generate && next build",
+  "installCommand": "bun install"
+}
