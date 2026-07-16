@@ -116,68 +116,26 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
     }
     setPdfLoading(true)
     try {
-      const isComplex = COMPLEX_DOC_TYPES.includes(preview.docType)
-
-      if (isComplex) {
-        const res = await fetch('/api/generate-pdf', {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain', ...authHeaders() },
-          body: htmlToUse,
-        })
-        if (!res.ok) {
-          const errData = await res.json().catch(() => ({}))
-          throw new Error(errData.error || errData.details || 'Server PDF failed')
-        }
-        const blob = await res.blob()
-        const docLabel = preview.docType.replace('_', '-')
-        const fileName = preview.formData.name
-          ? `${docLabel}-${preview.formData.name.replace(/\s+/g, '-')}`
-          : `${docLabel}-${new Date().getTime()}`
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = `${fileName}.pdf`
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-        URL.revokeObjectURL(url)
-        toast.success('PDF downloaded successfully')
-        if (preview) recordHistory(preview.docType, preview.formData, fileName)
-      } else {
-        const html2pdf = (await import('html2pdf.js')).default
-        const container = document.createElement('div')
-        container.innerHTML = htmlToUse
-        container.style.position = 'fixed'
-        container.style.left = '-9999px'
-        container.style.top = '0'
-        container.style.zIndex = '-1'
-        const pageEl = container.querySelector('.page') || container.querySelector('.doc-wrapper') || container
-        document.body.appendChild(container)
-        await new Promise(r => requestAnimationFrame(r))
-
-        const docLabel = preview.docType.replace('_', '-')
-        const fileName = preview.formData.name 
-          ? `${docLabel}-${preview.formData.name.replace(/\s+/g, '-')}`
-          : `${docLabel}-${new Date().getTime()}`
-
-        const opt = {
-          margin: 0,
-          filename: `${fileName}.pdf`,
-          image: { type: 'jpeg' as const, quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, logging: false },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
-          pagebreak: { mode: ['avoid-all', 'css', 'legacy'] as string[] }
-        }
-
-        await html2pdf().set(opt).from(pageEl as HTMLElement).save()
-        document.body.removeChild(container)
-        toast.success('PDF downloaded successfully')
-        if (preview) recordHistory(preview.docType, preview.formData, fileName)
+      const printWin = window.open('', '_blank')
+      if (!printWin) {
+        toast.error('Popup blocked. Please allow popups for this site.')
+        return
       }
+      printWin.document.open()
+      printWin.document.write(htmlToUse)
+      printWin.document.close()
+      printWin.focus()
+      await new Promise(r => setTimeout(r, 500))
+      printWin.print()
+
+      const docLabel = preview.docType.replace('_', '-')
+      const fileName = preview.formData.name
+        ? `${docLabel}-${preview.formData.name.replace(/\s+/g, '-')}`
+        : `${docLabel}-${new Date().getTime()}`
+      if (preview) recordHistory(preview.docType, preview.formData, fileName)
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error(err)
-      toast.error('PDF generation failed. Falling back to browser print (Ctrl+P) if needed.')
+      toast.error('PDF generation failed. Use browser print (Ctrl+P) instead.')
     } finally {
       setPdfLoading(false)
     }
