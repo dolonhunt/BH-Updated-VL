@@ -201,6 +201,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    await ensureSeeded()
     const body = await request.json()
     const docType = body.type || 'payslip'
     const formData = body.data || {}

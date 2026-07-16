@@ -247,7 +247,7 @@ export default function Home() {
 
           {/* DASHBOARD */}
           <ErrorBoundary fallbackTitle="Dashboard">
-            {view === 'dashboard' && <Dashboard onNavigate={navigateTo} />}
+            {view === 'dashboard' && <div className="overflow-y-auto flex-1"><Dashboard onNavigate={navigateTo} /></div>}
           </ErrorBoundary>
 
           <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} onNavigate={navigateTo} />
@@ -277,7 +277,7 @@ export default function Home() {
 
           {/* TEMPLATE ADMIN */}
           <ErrorBoundary fallbackTitle="Template Admin">
-            {view === 'template_admin' && <TemplateAdmin />}
+            {view === 'template_admin' && <div className="overflow-y-auto flex-1"><TemplateAdmin /></div>}
           </ErrorBoundary>
 
           {/* HR MOD - Employees list & form */}
@@ -297,12 +297,12 @@ export default function Home() {
 
           {/* DOCUMENT HISTORY */}
           <ErrorBoundary fallbackTitle="Document History">
-            {view === 'doc_history' && <DocumentHistory onNavigate={navigateTo} />}
+            {view === 'doc_history' && <div className="overflow-y-auto flex-1"><DocumentHistory onNavigate={navigateTo} /></div>}
           </ErrorBoundary>
 
           {/* BATCH GENERATION */}
           <ErrorBoundary fallbackTitle="Batch Generator">
-            {view === 'batch_generation' && <BatchGenerator />}
+            {view === 'batch_generation' && <div className="overflow-y-auto flex-1"><BatchGenerator /></div>}
           </ErrorBoundary>
 
           {/* SETTINGS */}
