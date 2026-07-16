@@ -13,6 +13,8 @@ const EMPLOYEES = [
   { id: 'BH0011', name: 'Md. Turab Hossain', designation: 'HR Executive', department: 'HR', joining_date: '2026-02-01', basic: 35000, house_rent: 17500, conveyance: 8000, medical: 5250, food_mobile: 5250, cash: 45000, gross: 115000, tax: 9000, net: 106000, bank_account: 'Bank T/F', ref_code: 'TBH-46084' },
   { id: 'BH0012', name: 'Efte Ahmed Nerob', designation: 'Office Assistant', department: 'Administration', joining_date: '2026-02-15', basic: 15000, house_rent: 7500, conveyance: 4000, medical: 2250, food_mobile: 2250, cash: 20000, gross: 50000, tax: 3000, net: 47000, bank_account: 'Bank T/F', ref_code: 'TBH-46085' },
   { id: 'BH0013', name: 'Md. Mahiuddin', designation: 'Office Assistant', department: 'Administration', joining_date: '2026-03-01', basic: 15000, house_rent: 7500, conveyance: 4000, medical: 2250, food_mobile: 2250, cash: 20000, gross: 50000, tax: 3000, net: 47000, bank_account: 'Bank T/F', ref_code: 'TBH-46086' },
+  { id: 'DEMO01', name: 'Demo User One', designation: 'Junior Executive', department: 'HR', joining_date: '2026-06-01', basic: 25000, house_rent: 12500, conveyance: 5000, medical: 3750, food_mobile: 3750, cash: 25000, gross: 75000, tax: 5000, net: 70000, bank_account: 'Bank T/F', ref_code: 'DEMO-001' },
+  { id: 'DEMO02', name: 'Demo User Two', designation: 'Trainee', department: 'Editorial', joining_date: '2026-07-01', basic: 15000, house_rent: 7500, conveyance: 3000, medical: 2250, food_mobile: 2250, cash: 15000, gross: 45000, tax: 3000, net: 42000, bank_account: 'Bank T/F', ref_code: 'DEMO-002' },
 ]
 
 async function main() {

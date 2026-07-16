@@ -1,3 +1,7 @@
+import { authHeaders } from './api-client'
+
+const JSON_HEADERS = (): Record<string, string> => ({ 'Content-Type': 'application/json', ...authHeaders() })
+
 // ─── DEPRECATED: This file is being replaced by API routes ───
 // The TypeScript interfaces (Employee, CompanyConfig) are still exported
 // for use by components until they are migrated to API-based types.
@@ -83,20 +87,18 @@ export async function getEmployee(id: string): Promise<Employee | null> {
 /** @deprecated Use POST /api/employees (create) or PUT /api/employees/[id] (update) instead */
 export async function saveEmployee(emp: Employee): Promise<void> {
   if (typeof window === 'undefined') return
-  const checkRes = await fetch(`/api/employees/${emp.id}`)
+  const checkRes = await fetch(`/api/employees/${emp.id}`, { headers: authHeaders() })
   if (checkRes.ok) {
-    // Update
     const res = await fetch(`/api/employees/${emp.id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: JSON_HEADERS(),
       body: JSON.stringify(emp),
     })
     if (!res.ok) throw new Error('Failed to update employee')
   } else {
-    // Create
     const res = await fetch(`/api/employees`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: JSON_HEADERS(),
       body: JSON.stringify(emp),
     })
     if (!res.ok) throw new Error('Failed to create employee')
@@ -108,6 +110,7 @@ export async function deleteEmployee(id: string): Promise<void> {
   if (typeof window === 'undefined') return
   const res = await fetch(`/api/employees/${id}`, {
     method: 'DELETE',
+    headers: authHeaders(),
   })
   if (!res.ok) throw new Error('Failed to delete employee')
 }
