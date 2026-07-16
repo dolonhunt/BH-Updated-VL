@@ -10,7 +10,7 @@ import { validateRequiredFields } from '@/lib/validate'
 interface BankIntroLetterFormData { name: string; designation: string; department: string; ref_code: string; date: string; employee_id: string; bank_name: string; bank_branch: string; joining_date: string }
 const initialData: BankIntroLetterFormData = { name: '', designation: '', department: '', ref_code: '', date: new Date().toISOString().slice(0, 10), employee_id: '', bank_name: '', bank_branch: '', joining_date: '' }
 function mapEmployeeToForm(emp: Employee): Partial<BankIntroLetterFormData> { return { name: emp.name, designation: emp.designation, department: emp.department, ref_code: emp.ref_code, employee_id: emp.id, joining_date: emp.joining_date } }
-function onCalculate(_d: BankIntroLetterFormData): Partial<BankIntroLetterFormData> { return {} }
+function onCalculate(): Partial<BankIntroLetterFormData> { return {} }
 export function BankIntroLetterForm() {
   const h = useDocumentForm({ docType: 'bank_intro_letter', initialData, mapEmployeeToForm, onCalculate, validate: (d) => validateRequiredFields(d, { name: { required: true, label: 'Name' }, designation: { required: true, label: 'Designation' }, bank_name: { required: true, label: 'Bank name' } }) })
   const { formData, setField, selectedEmployeeId, handleEmployeeChange, employees, mismatches, showMismatchModal, setShowMismatchModal, handleGenerate, handleMismatchAction, generated, errors } = h

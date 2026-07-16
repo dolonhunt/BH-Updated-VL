@@ -27,6 +27,7 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Download error:', err);
     return NextResponse.json({ error: 'File not found' }, { status: 404 });
   }

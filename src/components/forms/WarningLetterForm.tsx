@@ -21,7 +21,7 @@ const initialData: WarningLetterFormData = {
 function mapEmployeeToForm(emp: Employee): Partial<WarningLetterFormData> {
   return { name: emp.name, designation: emp.designation, department: emp.department, ref_code: emp.ref_code }
 }
-function onCalculate(_d: WarningLetterFormData): Partial<WarningLetterFormData> { return {} }
+function onCalculate(): Partial<WarningLetterFormData> { return {} }
 
 export function WarningLetterForm() {
   const hook = useDocumentForm({

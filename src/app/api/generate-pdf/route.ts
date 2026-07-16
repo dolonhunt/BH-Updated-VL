@@ -92,6 +92,7 @@ export async function POST(request: NextRequest) {
       },
     })
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('PDF generation error:', err)
     return NextResponse.json(
       { error: 'PDF generation failed', details: String(err) },

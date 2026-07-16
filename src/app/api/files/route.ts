@@ -106,6 +106,7 @@ export async function GET(request: NextRequest) {
       items,
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Files API error:', err);
     return NextResponse.json({ error: 'Path not found' }, { status: 404 });
   }

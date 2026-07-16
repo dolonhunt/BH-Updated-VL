@@ -39,7 +39,7 @@ function mapEmployeeToForm(emp: Employee): Partial<EmploymentCertFormData> {
   }
 }
 
-function onCalculate(data: EmploymentCertFormData): Partial<EmploymentCertFormData> {
+function onCalculate(): Partial<EmploymentCertFormData> {
   return {}
 }
 

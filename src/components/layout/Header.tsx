@@ -39,7 +39,6 @@ export function Header({
   onOpenInNewTab,
   onSendEmail,
   onVersions,
-  zoomLevel,
   setZoomLevel,
   onHome,
   onBack,

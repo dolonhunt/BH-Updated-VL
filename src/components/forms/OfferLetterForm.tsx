@@ -40,7 +40,7 @@ function mapEmployeeToForm(emp: Employee): Partial<OfferLetterFormData> {
   }
 }
 
-function onCalculate(data: OfferLetterFormData): Partial<OfferLetterFormData> {
+function onCalculate(): Partial<OfferLetterFormData> {
   return {}
 }
 

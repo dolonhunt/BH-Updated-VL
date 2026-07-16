@@ -1,4 +1,3 @@
-import { SHARED_DOC_CSS } from './shared-css'
 import { TEMPLATE_REGISTRY } from './template-registry'
 import { formatBDT, formatDate, formatMonthYear, calculateGross, calculateNet, calculateBankTotal, numberToWords, calculateDuration } from '@/lib/calculations'
 
@@ -26,6 +25,7 @@ async function getCompanyFromDB(): Promise<typeof DEFAULT_COMPANY> {
       }
     }
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.warn('Could not fetch company from DB, using defaults:', err)
   }
   return DEFAULT_COMPANY

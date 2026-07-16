@@ -10,7 +10,7 @@ import { validateRequiredFields } from '@/lib/validate'
 interface NOCLetterFormData { name: string; designation: string; department: string; ref_code: string; date: string; father_name: string; employee_id: string; joining_date: string; leaving_date: string; noc_purpose: string; noc_validity: string }
 const initialData: NOCLetterFormData = { name: '', designation: '', department: '', ref_code: '', date: new Date().toISOString().slice(0, 10), father_name: '', employee_id: '', joining_date: '', leaving_date: '', noc_purpose: '', noc_validity: 'One Year' }
 function mapEmployeeToForm(emp: Employee): Partial<NOCLetterFormData> { return { name: emp.name, designation: emp.designation, department: emp.department, ref_code: emp.ref_code, employee_id: emp.id } }
-function onCalculate(_d: NOCLetterFormData): Partial<NOCLetterFormData> { return {} }
+function onCalculate(): Partial<NOCLetterFormData> { return {} }
 export function NOCLetterForm() {
   const h = useDocumentForm({ docType: 'noc_letter', initialData, mapEmployeeToForm, onCalculate, validate: (d) => validateRequiredFields(d, { name: { required: true, label: 'Name' }, designation: { required: true, label: 'Designation' }, father_name: { required: true, label: "Father's name" } }) })
   const { formData, setField, selectedEmployeeId, handleEmployeeChange, employees, mismatches, showMismatchModal, setShowMismatchModal, handleGenerate, handleMismatchAction, generated, errors } = h

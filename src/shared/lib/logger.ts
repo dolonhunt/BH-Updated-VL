@@ -35,6 +35,7 @@ class Logger {
   debug(message: string, context?: LogContext) {
     if (this.shouldLog('debug')) {
       const formatted = this.formatMessage('debug', message, context);
+      // eslint-disable-next-line no-console
       if (this.isDev) console.debug(`[DEBUG] ${formatted}`);
       // In production, send to log aggregation service (e.g., Sentry, Datadog)
     }
@@ -43,6 +44,7 @@ class Logger {
   info(message: string, context?: LogContext) {
     if (this.shouldLog('info')) {
       const formatted = this.formatMessage('info', message, context);
+      // eslint-disable-next-line no-console
       console.log(`[INFO] ${formatted}`);
     }
   }
@@ -50,6 +52,7 @@ class Logger {
   warn(message: string, context?: LogContext) {
     if (this.shouldLog('warn')) {
       const formatted = this.formatMessage('warn', message, context);
+      // eslint-disable-next-line no-console
       console.warn(`[WARN] ${formatted}`);
     }
   }
@@ -57,9 +60,11 @@ class Logger {
   error(message: string, context?: LogContext) {
     if (this.shouldLog('error')) {
       const formatted = this.formatMessage('error', message, context);
+      // eslint-disable-next-line no-console
       console.error(`[ERROR] ${formatted}`);
       // In production, send to error tracking (e.g., Sentry)
       if (context?.error instanceof Error) {
+        // eslint-disable-next-line no-console
         console.error('Stack:', context.error.stack);
       }
     }

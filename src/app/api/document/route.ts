@@ -220,6 +220,7 @@ export async function POST(request: NextRequest) {
     const html = await renderDocument(docType, formData)
     return new NextResponse(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } })
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Document render error:', err)
     return NextResponse.json({ error: 'Failed to render document' }, { status: 500 })
   }

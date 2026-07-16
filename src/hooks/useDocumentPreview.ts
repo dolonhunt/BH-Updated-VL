@@ -58,6 +58,7 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
           setPreviewSrc(url)
         }
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error('Failed to fetch preview:', err)
       }
     }
@@ -169,6 +170,7 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
         if (preview) recordHistory(preview.docType, preview.formData, fileName)
       }
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err)
       toast.error('PDF generation failed. Falling back to browser print (Ctrl+P) if needed.')
     } finally {
@@ -213,6 +215,7 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
       toast.success('DOCX downloaded successfully')
       if (preview) recordHistory(preview.docType, preview.formData, fileName)
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err)
       toast.error('DOCX generation failed.')
     } finally {
@@ -241,6 +244,7 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
         printWin.focus()
         printWin.print()
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error('Auto print failed:', err)
       }
     }

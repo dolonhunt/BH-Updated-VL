@@ -22,6 +22,7 @@ function getSnapshot(): Employee[] {
           return cached
         })
         .catch(err => {
+          // eslint-disable-next-line no-console
           console.error(err)
           cached = []
           return cached

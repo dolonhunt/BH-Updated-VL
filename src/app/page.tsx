@@ -8,58 +8,25 @@ import { DocumentCanvas } from '@/components/editor/DocumentCanvas'
 import { EmployeeModule } from '@/components/employees/EmployeeModule'
 import { SettingsForm } from '@/components/settings/SettingsForm'
 
-// Forms
-import { OfficialPadForm } from '@/components/forms/OfficialPadForm'
-import { WorkOrderForm } from '@/components/forms/WorkOrderForm'
-import { PurchaseOrderForm } from '@/components/forms/PurchaseOrderForm'
-import { RequisitionForm } from '@/components/forms/RequisitionForm'
-import { PaySlipForm } from '@/components/forms/PaySlipForm'
-import { SalaryCertForm } from '@/components/forms/SalaryCertForm'
-import { AppointmentForm } from '@/components/forms/AppointmentForm'
-import { ExperienceForm } from '@/components/forms/ExperienceForm'
-import { EmploymentCertForm } from '@/components/forms/EmploymentCertForm'
-import { OfferLetterForm } from '@/components/forms/OfferLetterForm'
-import { NDAForm } from '@/components/forms/NDAForm'
-import { JoiningReportForm } from '@/components/forms/JoiningReportForm'
-import { IDCardForm } from '@/components/forms/IDCardForm'
-import { PersonalInfoForm } from '@/components/forms/PersonalInfoForm'
-import { RelievingLetterForm } from '@/components/forms/RelievingLetterForm'
-import { ResignationAcceptanceForm } from '@/components/forms/ResignationAcceptanceForm'
-import { ClearanceCertForm } from '@/components/forms/ClearanceCertForm'
-import { ShowCauseForm } from '@/components/forms/ShowCauseForm'
-import { PromotionLetterForm } from '@/components/forms/PromotionLetterForm'
-import { FnFSettlementForm } from '@/components/forms/FnFSettlementForm'
-import { WarningLetterForm } from '@/components/forms/WarningLetterForm'
-import { SuspensionLetterForm } from '@/components/forms/SuspensionLetterForm'
-import { TerminationLetterForm } from '@/components/forms/TerminationLetterForm'
-import { SalaryIncrementForm } from '@/components/forms/SalaryIncrementForm'
-import { BonusLetterForm } from '@/components/forms/BonusLetterForm'
-import { AppreciationLetterForm } from '@/components/forms/AppreciationLetterForm'
-import { PIPLetterForm } from '@/components/forms/PIPLetterForm'
-import { NOCLetterForm } from '@/components/forms/NOCLetterForm'
-import { BankIntroLetterForm } from '@/components/forms/BankIntroLetterForm'
-import { EmbassyLetterForm } from '@/components/forms/EmbassyLetterForm'
-import { LeaveApprovalForm } from '@/components/forms/LeaveApprovalForm'
-import { LWPNoticeForm } from '@/components/forms/LWPNoticeForm'
-import { ArrearPaymentForm } from '@/components/forms/ArrearPaymentForm'
-import { ProbationConfirmationForm } from '@/components/forms/ProbationConfirmationForm'
+import { FormRouter } from '@/components/forms/FormRouter'
 
 import { setPreviewData } from '@/lib/preview-store'
 import { useEditorBridge } from '@/hooks/useEditorBridge'
 import { useDocumentPreview } from '@/hooks/useDocumentPreview'
-import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 import { Dashboard } from '@/components/dashboard/Dashboard'
 import { TemplateAdmin } from '@/components/templates/TemplateAdmin'
 import { CommandPalette } from '@/components/layout/CommandPalette'
 import { EmailDialog } from '@/components/editor/EmailDialog'
 import { ComingSoonForm } from '@/components/forms/ComingSoonForm'
-import { PolicyDocForm } from '@/components/forms/PolicyDocForm'
+
 import { ErrorBoundary } from '@/components/error/ErrorBoundary'
 import { ConfirmDiscardProvider } from '@/lib/confirm-discard-context'
 import { FormSkeleton } from '@/components/ui/skeleton-loader'
 import { Loader2 } from 'lucide-react'
 import { VersionHistory } from '@/components/editor/VersionHistory'
+import { DocumentHistory } from '@/components/history/DocumentHistory'
+import { BatchGenerator } from '@/components/batch/BatchGenerator'
 import { useDocVersioning } from '@/hooks/useDocVersioning'
 
 export default function Home() {
@@ -247,42 +214,7 @@ export default function Home() {
                   <ConfirmDiscardProvider>
                     <div className="flex-1 overflow-y-auto">
                     <div className="p-4 space-y-4">
-                      {view === 'official_pad' && <OfficialPadForm />}
-                      {view === 'work_order' && <WorkOrderForm />}
-                      {view === 'purchase_order' && <PurchaseOrderForm />}
-                      {view === 'requisition' && <RequisitionForm />}
-                      {view === 'payslip' && <PaySlipForm />}
-                      {view === 'salary_cert' && <SalaryCertForm />}
-                      {view === 'appointment' && <AppointmentForm />}
-                      {view === 'experience' && <ExperienceForm />}
-                      {view === 'employment_cert' && <EmploymentCertForm />}
-                      {view === 'offer_letter' && <OfferLetterForm />}
-                      {view === 'nda' && <NDAForm />}
-                      {view === 'joining_report' && <JoiningReportForm />}
-                      {view === 'id_card_form' && <IDCardForm />}
-                      {view === 'personal_info_form' && <PersonalInfoForm />}
-                      {view === 'relieving_letter' && <RelievingLetterForm />}
-                      {view === 'resignation_acceptance' && <ResignationAcceptanceForm />}
-                      {view === 'clearance_cert' && <ClearanceCertForm />}
-                      {view === 'show_cause' && <ShowCauseForm />}
-                      {view === 'promotion_letter' && <PromotionLetterForm />}
-                      {view === 'fnf_settlement' && <FnFSettlementForm />}
-                      {view === 'warning_letter' && <WarningLetterForm />}
-                      {view === 'suspension_letter' && <SuspensionLetterForm />}
-                      {view === 'termination_letter' && <TerminationLetterForm />}
-                      {view === 'salary_increment' && <SalaryIncrementForm />}
-                      {view === 'bonus_letter' && <BonusLetterForm />}
-                      {view === 'appreciation_letter' && <AppreciationLetterForm />}
-                      {view === 'pip_letter' && <PIPLetterForm />}
-                      {view === 'noc_letter' && <NOCLetterForm />}
-                      {view === 'bank_intro_letter' && <BankIntroLetterForm />}
-                      {view === 'embassy_letter' && <EmbassyLetterForm />}
-                      {view === 'leave_approval' && <LeaveApprovalForm />}
-                      {view === 'lwp_notice' && <LWPNoticeForm />}
-                      {view === 'arrear_payment' && <ArrearPaymentForm />}
-                      {view === 'probation_confirmation' && <ProbationConfirmationForm />}
-                      {view === 'hr_handbook' && <PolicyDocForm docType="hr_handbook" label="HR Handbook" description="Company HR policies & procedures" />}
-                      {view === 'leave_policy' && <PolicyDocForm docType="leave_policy" label="Leave Policy" description="Leave types & application rules" />}
+                      <FormRouter view={view} />
                       {!(ALL_DOC_TYPES as readonly string[]).includes(view) && (
                         <ComingSoonForm label={(view as string).replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} />
                       )}
@@ -361,6 +293,16 @@ export default function Home() {
                 <EmployeeModule route="employees-list" onNavigate={navigateTo} />
               </div>
             )}
+          </ErrorBoundary>
+
+          {/* DOCUMENT HISTORY */}
+          <ErrorBoundary fallbackTitle="Document History">
+            {view === 'doc_history' && <DocumentHistory onNavigate={navigateTo} />}
+          </ErrorBoundary>
+
+          {/* BATCH GENERATION */}
+          <ErrorBoundary fallbackTitle="Batch Generator">
+            {view === 'batch_generation' && <BatchGenerator />}
           </ErrorBoundary>
 
           {/* SETTINGS */}

@@ -126,7 +126,6 @@ export function WorkOrderForm() {
     setField,
     setFormData,
     handleGenerate,
-    generated,
   } = useDocumentForm({
     docType: 'work_order',
     initialData,

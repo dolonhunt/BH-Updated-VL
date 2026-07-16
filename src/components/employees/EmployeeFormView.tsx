@@ -149,6 +149,7 @@ export function EmployeeFormView({ employeeId, onCancel, onSaved }: EmployeeForm
       invalidateEmployeeCache()
       onSaved()
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Failed to save employee:', err)
     } finally {
       setSaving(false)

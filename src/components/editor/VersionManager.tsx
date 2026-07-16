@@ -9,7 +9,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import {
-  Save, GitBranch, Trash2, Clock, Download, ChevronDown, Plus, FolderOpen,
+  Save, GitBranch, Trash2, Clock, Download, ChevronDown, FolderOpen,
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 

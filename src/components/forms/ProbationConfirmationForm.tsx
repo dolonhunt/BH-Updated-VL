@@ -35,7 +35,7 @@ function mapEmployeeToForm(emp: Employee): Partial<ProbationConfirmationFormData
   }
 }
 
-function onCalculate(data: ProbationConfirmationFormData): Partial<ProbationConfirmationFormData> {
+function onCalculate(): Partial<ProbationConfirmationFormData> {
   return {}
 }
 

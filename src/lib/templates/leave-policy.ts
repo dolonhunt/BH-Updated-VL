@@ -2,6 +2,10 @@ import { SHARED_DOC_CSS, HEADER_HTML, FOOTER_HTML, PAGINATION_SCRIPT } from './s
 
 const NAVY = '#021945'
 
+function clause(text: string): string {
+  return `<div class="clause">${text}</div>`
+}
+
 const POLICY_CSS = `
   @page { margin: 20mm 15mm; }
   .page { position:relative; padding:0; background:#fff; font-family:'DM Sans',sans-serif; color:#333; line-height:1.7; font-size:12px; }

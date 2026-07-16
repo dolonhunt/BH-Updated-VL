@@ -10,7 +10,7 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
   rules: {
     // TypeScript rules
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/prefer-as-const": "off",
@@ -18,6 +18,7 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     
     // React rules
     "react-hooks/exhaustive-deps": "off",
+    "react-hooks/preserve-manual-memoization": "off",
     "react-hooks/purity": "off",
     "react-hooks/set-state-in-effect": "off",
     "react-hooks/refs": "off",
@@ -31,13 +32,13 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     "@next/next/no-html-link-for-pages": "off",
     
     // General JavaScript rules
-    "prefer-const": "off",
+    "prefer-const": "warn",
     "no-unused-vars": "off",
-    "no-console": "off",
+    "no-console": "warn",
     "no-debugger": "off",
-    "no-empty": "off",
+    "no-empty": "warn",
     "no-irregular-whitespace": "off",
-    "no-case-declarations": "off",
+    "no-case-declarations": "warn",
     "no-fallthrough": "off",
     "no-mixed-spaces-and-tabs": "off",
     "no-redeclare": "off",

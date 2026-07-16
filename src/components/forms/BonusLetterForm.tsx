@@ -21,7 +21,7 @@ const initialData: BonusLetterFormData = {
 function mapEmployeeToForm(emp: Employee): Partial<BonusLetterFormData> {
   return { name: emp.name, designation: emp.designation, department: emp.department, ref_code: emp.ref_code }
 }
-function onCalculate(_d: BonusLetterFormData): Partial<BonusLetterFormData> { return {} }
+function onCalculate(): Partial<BonusLetterFormData> { return {} }
 
 export function BonusLetterForm() {
   const hook = useDocumentForm({

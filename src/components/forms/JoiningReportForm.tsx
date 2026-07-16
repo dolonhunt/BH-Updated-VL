@@ -34,7 +34,7 @@ function mapEmployeeToForm(emp: Employee): Partial<JoiningReportFormData> {
   }
 }
 
-function onCalculate(data: JoiningReportFormData): Partial<JoiningReportFormData> {
+function onCalculate(): Partial<JoiningReportFormData> {
   return {}
 }
 

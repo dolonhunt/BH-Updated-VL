@@ -40,6 +40,8 @@
     "node_modules",
     "examples",
     "mini-services",
-    "scripts"
+    "scripts",
+    "BH Office V1",
+    "tests"
   ]
 }

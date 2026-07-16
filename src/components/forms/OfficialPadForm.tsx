@@ -1,7 +1,6 @@
 'use client'
 
 import { useDocumentForm } from '@/hooks/useDocumentForm'
-import { FormField } from './FormField'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
@@ -31,7 +30,6 @@ export function OfficialPadForm() {
     formData,
     setField,
     handleGenerate,
-    generated,
   } = useDocumentForm({
     docType: 'official_pad',
     initialData,

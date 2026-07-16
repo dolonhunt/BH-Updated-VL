@@ -20,7 +20,7 @@ import {
   List, ListOrdered,
   Undo2, Redo2, RemoveFormatting,
   Type, Minus, Link,
-  Palette, Highlighter, ChevronsUpDown,
+  Palette, Highlighter,
   ZoomIn, ZoomOut, Search,
   ChevronDown,
 } from 'lucide-react'

@@ -112,7 +112,6 @@ export function PurchaseOrderForm() {
     setField,
     setFormData,
     handleGenerate,
-    generated,
   } = useDocumentForm({
     docType: 'purchase_order',
     initialData,
@@ -419,3 +418,4 @@ export function PurchaseOrderForm() {
     </div>
   )
 }
+

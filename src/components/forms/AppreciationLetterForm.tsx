@@ -11,7 +11,7 @@ import { validateRequiredFields } from '@/lib/validate'
 interface AppreciationLetterFormData { name: string; designation: string; department: string; ref_code: string; date: string; achievement_details: string }
 const initialData: AppreciationLetterFormData = { name: '', designation: '', department: '', ref_code: '', date: new Date().toISOString().slice(0, 10), achievement_details: '' }
 function mapEmployeeToForm(emp: Employee): Partial<AppreciationLetterFormData> { return { name: emp.name, designation: emp.designation, department: emp.department, ref_code: emp.ref_code } }
-function onCalculate(_d: AppreciationLetterFormData): Partial<AppreciationLetterFormData> { return {} }
+function onCalculate(): Partial<AppreciationLetterFormData> { return {} }
 
 export function AppreciationLetterForm() {
   const h = useDocumentForm({ docType: 'appreciation_letter', initialData, mapEmployeeToForm, onCalculate, validate: (d) => validateRequiredFields(d, { name: { required: true, label: 'Name' }, designation: { required: true, label: 'Designation' }, department: { required: true, label: 'Department' }, achievement_details: { required: true, label: 'Achievement details' } }) })

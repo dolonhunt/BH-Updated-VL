@@ -120,7 +120,8 @@ export function useAppSettings() {
 
   const removeLetterhead = useCallback((docType: string) => {
     updateSettings(prev => {
-      const { [docType]: _, ...rest } = prev.letterheads
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { [docType]: _unused, ...rest } = prev.letterheads
       return { ...prev, letterheads: rest }
     })
   }, [updateSettings])

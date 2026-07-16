@@ -49,7 +49,6 @@ function mapEmployeeToForm(emp: Employee): Partial<PromotionLetterFormData> {
 
 function onCalculate(data: PromotionLetterFormData): Partial<PromotionLetterFormData> {
   const newGrossNum = Number(data.new_gross) || 0
-  const incrNum = Number(data.increment) || 0
   const netInWords = newGrossNum ? numberToWords(newGrossNum) : ''
   return {
     old_designation: data.designation,

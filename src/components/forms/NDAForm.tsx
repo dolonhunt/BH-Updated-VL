@@ -31,7 +31,7 @@ function mapEmployeeToForm(emp: Employee): Partial<NDAFormData> {
   }
 }
 
-function onCalculate(data: NDAFormData): Partial<NDAFormData> {
+function onCalculate(): Partial<NDAFormData> {
   return {}
 }
 

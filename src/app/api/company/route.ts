@@ -10,6 +10,7 @@ export async function GET() {
     }
     return NextResponse.json(config)
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Failed to fetch company config:', error)
     return NextResponse.json({ error: 'Failed to fetch company config' }, { status: 500 })
   }
@@ -25,6 +26,7 @@ export async function PUT(request: NextRequest) {
     })
     return NextResponse.json(config)
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Failed to update company config:', error)
     return NextResponse.json({ error: 'Failed to update company config' }, { status: 500 })
   }

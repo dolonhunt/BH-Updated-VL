@@ -57,7 +57,7 @@ function mapEmployeeToForm(emp: Employee): Partial<PersonalInfoFormData> {
   }
 }
 
-function onCalculate(data: PersonalInfoFormData): Partial<PersonalInfoFormData> {
+function onCalculate(): Partial<PersonalInfoFormData> {
   return {}
 }
 

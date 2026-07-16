@@ -10,7 +10,7 @@ import { validateRequiredFields } from '@/lib/validate'
 interface EmbassyLetterFormData { name: string; designation: string; department: string; ref_code: string; date: string; passport_no: string; employee_id: string; joining_date: string; monthly_salary: string; leave_start: string; leave_end: string; embassy_name: string; embassy_location: string }
 const initialData: EmbassyLetterFormData = { name: '', designation: '', department: '', ref_code: '', date: new Date().toISOString().slice(0, 10), passport_no: '', employee_id: '', joining_date: '', monthly_salary: '', leave_start: '', leave_end: '', embassy_name: '', embassy_location: '' }
 function mapEmployeeToForm(emp: Employee): Partial<EmbassyLetterFormData> { return { name: emp.name, designation: emp.designation, department: emp.department, ref_code: emp.ref_code, employee_id: emp.id } }
-function onCalculate(_d: EmbassyLetterFormData): Partial<EmbassyLetterFormData> { return {} }
+function onCalculate(): Partial<EmbassyLetterFormData> { return {} }
 export function EmbassyLetterForm() {
   const h = useDocumentForm({ docType: 'embassy_letter', initialData, mapEmployeeToForm, onCalculate, validate: (d) => validateRequiredFields(d, { name: { required: true, label: 'Name' }, designation: { required: true, label: 'Designation' }, passport_no: { required: true, label: 'Passport number' }, embassy_name: { required: true, label: 'Embassy name' } }) })
   const { formData, setField, selectedEmployeeId, handleEmployeeChange, employees, mismatches, showMismatchModal, setShowMismatchModal, handleGenerate, handleMismatchAction, generated, errors } = h

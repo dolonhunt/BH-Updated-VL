@@ -21,7 +21,7 @@ const initialData: SuspensionLetterFormData = {
 function mapEmployeeToForm(emp: Employee): Partial<SuspensionLetterFormData> {
   return { name: emp.name, designation: emp.designation, department: emp.department, ref_code: emp.ref_code }
 }
-function onCalculate(_d: SuspensionLetterFormData): Partial<SuspensionLetterFormData> { return {} }
+function onCalculate(): Partial<SuspensionLetterFormData> { return {} }
 
 export function SuspensionLetterForm() {
   const hook = useDocumentForm({

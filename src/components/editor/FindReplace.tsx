@@ -3,7 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Search, X, ArrowDown, ArrowUp, Replace } from 'lucide-react'
+import { Search, X, Replace } from 'lucide-react'
 
 interface FindReplaceProps {
   onFind: (query: string) => number
@@ -48,7 +48,7 @@ export default function FindReplace({
 
   const handleReplaceAll = useCallback(() => {
     if (!query.trim()) return
-    const count = onReplace(query.trim(), replacement, true)
+    onReplace(query.trim(), replacement, true)
     setMatchCount(0)
   }, [query, replacement, onReplace])
 

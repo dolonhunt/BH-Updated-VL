@@ -38,7 +38,7 @@ function mapEmployeeToForm(emp: Employee): Partial<ShowCauseFormData> {
   }
 }
 
-function onCalculate(_data: ShowCauseFormData): Partial<ShowCauseFormData> {
+function onCalculate(): Partial<ShowCauseFormData> {
   return {}
 }
 

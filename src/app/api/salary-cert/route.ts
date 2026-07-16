@@ -14,6 +14,7 @@ export async function GET() {
       },
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Salary certificate serve error:', err);
     return NextResponse.json({ error: 'File not found' }, { status: 404 });
   }

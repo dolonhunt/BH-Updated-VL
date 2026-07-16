@@ -72,6 +72,7 @@ export function SettingsForm() {
       toast.success('General settings saved')
       setTimeout(() => setShowSaved(false), 2000)
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Failed to save settings:', err)
       toast.error('Failed to save settings')
     } finally {

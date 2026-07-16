@@ -8,7 +8,8 @@ import {
   LayoutDashboard, UserPlus, List, Settings, FileText, ClipboardList,
   ShoppingCart, Receipt, DollarSign, Briefcase, Award, BadgeCheck,
   ChevronLeft, Menu, ScrollText, UserCheck, CreditCard,
-  ShieldCheck, User, ChevronDown, TrendingUp, Code, Search
+  ShieldCheck, User, ChevronDown, TrendingUp, Code, Search,
+  History, Layers
 } from 'lucide-react'
 
 export type View =
@@ -54,9 +55,16 @@ export type View =
   // Leave & Attendance
   | 'leave_approval'
   | 'lwp_notice'
+  // Draft Templates
+  | 'incident_report'
+  | 'disciplinary_hearing'
+  | 'transfer_order'
+  | 'shift_change'
   // Other views
   | 'employees'
   | 'employee_list'
+  | 'doc_history'
+  | 'batch_generation'
   | 'hr_handbook'
   | 'leave_policy'
   | 'settings'
@@ -97,6 +105,10 @@ export type DocType =
   | 'appreciation_letter'
   | 'leave_approval'
   | 'lwp_notice'
+  | 'incident_report'
+  | 'disciplinary_hearing'
+  | 'transfer_order'
+  | 'shift_change'
   | 'hr_handbook'
   | 'leave_policy'
 
@@ -191,6 +203,16 @@ export const CATEGORIES: Category[] = [
     items: [
       { key: 'hr_handbook', label: 'HR Handbook', icon: <FileText className="w-4 h-4" />, desc: 'Company HR policies & procedures' },
       { key: 'leave_policy', label: 'Leave Policy', icon: <FileText className="w-4 h-4" />, desc: 'Leave types & application rules' },
+    ],
+  },
+  {
+    name: 'Draft Templates',
+    icon: <FileText className="w-4 h-4" />,
+    items: [
+      { key: 'incident_report' as DocType, label: 'Incident Report', icon: <FileText className="w-4 h-4" />, desc: 'Workplace incident documentation', comingSoon: true },
+      { key: 'disciplinary_hearing' as DocType, label: 'Disciplinary Hearing', icon: <FileText className="w-4 h-4" />, desc: 'Formal hearing notice', comingSoon: true },
+      { key: 'transfer_order' as DocType, label: 'Transfer Order', icon: <FileText className="w-4 h-4" />, desc: 'Inter-department transfer', comingSoon: true },
+      { key: 'shift_change' as DocType, label: 'Shift Change', icon: <FileText className="w-4 h-4" />, desc: 'Shift schedule adjustment', comingSoon: true },
     ],
   },
   {
@@ -340,6 +362,20 @@ export function Sidebar({ expanded, onToggle, currentView, setView }: SidebarPro
                 active={currentView === 'employee_list'}
                 expanded={expanded}
                 onClick={() => setView('employee_list')}
+              />
+              <NavButton
+                icon={<History className="w-4 h-4" />}
+                label="Document History"
+                active={currentView === 'doc_history'}
+                expanded={expanded}
+                onClick={() => setView('doc_history')}
+              />
+              <NavButton
+                icon={<Layers className="w-4 h-4" />}
+                label="Batch Generation"
+                active={currentView === 'batch_generation'}
+                expanded={expanded}
+                onClick={() => setView('batch_generation')}
               />
             </div>
           </div>

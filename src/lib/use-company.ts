@@ -30,6 +30,7 @@ function getSnapshot(): CompanyConfig {
           return cached as CompanyConfig
         })
         .catch(err => {
+          // eslint-disable-next-line no-console
           console.error(err)
           cached = DEFAULT_COMPANY
           return cached as CompanyConfig

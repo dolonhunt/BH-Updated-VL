@@ -55,6 +55,7 @@ export function EmployeeListView({ onEdit, onAddNew, onViewDocs }: EmployeeListV
       await deleteEmployee(deleteTarget.id)
       invalidateEmployeeCache()
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Failed to delete employee:', err)
     }
     setDeleteTarget(null)

@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
       },
     })
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('DOCX generation error:', err)
     return NextResponse.json({ error: 'DOCX generation failed' }, { status: 500 })
   }

@@ -2,7 +2,6 @@
 
 import { useDocumentForm } from '@/hooks/useDocumentForm'
 import { FormField } from './FormField'
-import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 
 interface Manpower {
@@ -46,7 +45,7 @@ function mapEmployeeToForm(): Partial<RequisitionFormData> {
   return {}
 }
 
-function onCalculate(data: RequisitionFormData): Partial<RequisitionFormData> {
+function onCalculate(): Partial<RequisitionFormData> {
   return {}
 }
 

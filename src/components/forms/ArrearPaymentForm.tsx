@@ -10,7 +10,7 @@ import { validateRequiredFields } from '@/lib/validate'
 interface ArrearPaymentFormData { name: string; designation: string; department: string; ref_code: string; date: string; arrear_amount: string; arrear_period: string; revision_date: string; pay_month: string }
 const initialData: ArrearPaymentFormData = { name: '', designation: '', department: '', ref_code: '', date: new Date().toISOString().slice(0, 10), arrear_amount: '', arrear_period: '', revision_date: '', pay_month: '' }
 function mapEmployeeToForm(emp: Employee): Partial<ArrearPaymentFormData> { return { name: emp.name, designation: emp.designation, department: emp.department, ref_code: emp.ref_code } }
-function onCalculate(_d: ArrearPaymentFormData): Partial<ArrearPaymentFormData> { return {} }
+function onCalculate(): Partial<ArrearPaymentFormData> { return {} }
 export function ArrearPaymentForm() {
   const h = useDocumentForm({ docType: 'arrear_payment', initialData, mapEmployeeToForm, onCalculate, validate: (d) => validateRequiredFields(d, { name: { required: true, label: 'Name' }, designation: { required: true, label: 'Designation' }, arrear_amount: { required: true, label: 'Arrear amount' } }) })
   const { formData, setField, selectedEmployeeId, handleEmployeeChange, employees, mismatches, showMismatchModal, setShowMismatchModal, handleGenerate, handleMismatchAction, generated, errors } = h

@@ -1,5 +1,5 @@
 'use client'
-import { FileText, Construction } from 'lucide-react'
+import { Construction } from 'lucide-react'
 
 interface ComingSoonFormProps {
   label?: string

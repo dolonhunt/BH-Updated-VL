@@ -35,7 +35,7 @@ function mapEmployeeToForm(emp: Employee): Partial<IDCardFormData> {
   }
 }
 
-function onCalculate(data: IDCardFormData): Partial<IDCardFormData> {
+function onCalculate(): Partial<IDCardFormData> {
   return {}
 }
 

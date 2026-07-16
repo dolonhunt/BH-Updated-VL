@@ -1,9 +1,9 @@
 /* Approved letterhead assets — base64 embedded for offline/PDF reliability */
-import { LOGO_BASE64, FOOTER_PIN_BASE64 } from '@/lib/generated/assets'
+import { LOGO_BASE64 } from '@/lib/generated/assets'
 
 // Fallback to remote URLs if base64 is unavailable (e.g., during development)
-const LOGO_URL  = LOGO_BASE64 || 'https://i.postimg.cc/Vk8rGFCM/Logo.png'
-const PIN_URL   = FOOTER_PIN_BASE64 || 'https://i.postimg.cc/3NjvRFtr/Location-Pin.png'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _LOGO_URL  = LOGO_BASE64 || 'https://i.postimg.cc/Vk8rGFCM/Logo.png'
 const HEADER_IMG_URL = 'https://i.postimg.cc/8zhhz7dd/BH-header-(1).png'
 const FOOTER_IMG_URL = 'https://i.postimg.cc/qvL9SXDf/footer-trimmed.png'
 
@@ -795,13 +795,12 @@ export const PAGINATION_SCRIPT = `
 </script>
 `
 
-export function HEADER_HTML(options: { 
+export function HEADER_HTML(_options: { 
   logo_scale?: number; 
   logo_alignment?: 'left' | 'center' | 'right';
   logoUrl?: string;
   pinUrl?: string;
 } = {}): string {
-  const logoUrl = options.logoUrl || LOGO_URL
   const headerUrl = HEADER_IMG_URL
 
   return `
@@ -811,7 +810,8 @@ export function HEADER_HTML(options: {
   `
 }
 
-export function FOOTER_HTML(pageNum?: number, totalPages?: number, options: { pinUrl?: string; address?: string } = {}): string {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function FOOTER_HTML(pageNum?: number, totalPages?: number, _options: { pinUrl?: string; address?: string } = {}): string {
   const pageDisplay = (pageNum && totalPages) ? `Page ${pageNum} of ${totalPages}` : ''
   const footerUrl = FOOTER_IMG_URL
 

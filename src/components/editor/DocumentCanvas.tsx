@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { Eye, Maximize2, Minimize2 } from 'lucide-react'
 import EditorToolbar from './EditorToolbar'
 import VersionManager from './VersionManager'

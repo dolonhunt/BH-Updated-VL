@@ -4,7 +4,7 @@ export function purchaseOrderHTML(data: Record<string, any>): string {
   const companyName = data.company_name || 'Beyond Headlines'
   const refCode = data.ref_code || `TBH/PO/${new Date().getFullYear()}/${String(Math.floor(1000 + Math.random() * 9000))}`
   const dateFmt = data.date_fmt || new Date().toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.')
-  const poNumber = data.po_number || `PO-${new Date().getFullYear()}-${String(Math.floor(1000 + Math.random() * 9000))}`
+
 
   // Vendor / Supplier info
   const vendorName = data.vendor_name || ''

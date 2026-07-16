@@ -14,6 +14,7 @@ export async function GET() {
       },
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Appointment letter serve error:', err);
     return NextResponse.json({ error: 'File not found' }, { status: 404 });
   }

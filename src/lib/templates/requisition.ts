@@ -146,7 +146,6 @@ export function requisitionHTML(data: Record<string, any>): string {
   let summaryRows = ''
   categories.forEach((cat: any) => {
     const cnt = cat.items.length
-    const isRec = cat.isRecommended === true
     summaryRows += `<tr><td>${cat.label}. ${cat.title}</td><td class="ctr">${cnt}</td></tr>`
   })
   const grandTotal = coreTotal + recTotal

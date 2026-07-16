@@ -7,7 +7,7 @@ import type { Employee } from '@/lib/storage'
 import { detectMismatches, applyFormToEmployee, DOC_MISMATCH_FIELDS } from '@/lib/mismatch'
 import { useConfirmDiscard } from '@/lib/confirm-discard-context'
 import type { MismatchAction } from '@/lib/mismatch'
-import { setPreviewData, clearPreviewData, usePreviewData, setPreviewDirty, setPreviewHasManualEdits } from '@/lib/preview-store'
+import { setPreviewData, clearPreviewData, usePreviewData, setPreviewHasManualEdits } from '@/lib/preview-store'
 
 interface UseDocumentFormOptions<T extends Record<string, any>> {
   docType: string
@@ -158,6 +158,7 @@ export function useDocumentForm<T extends Record<string, any>>(options: UseDocum
         await saveEmployee(updated)
         invalidateEmployeeCache()
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error('Failed to save employee mismatch update', err)
       }
     }
