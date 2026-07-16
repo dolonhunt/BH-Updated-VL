@@ -247,7 +247,7 @@ export default function Home() {
 
           {/* DASHBOARD */}
           <ErrorBoundary fallbackTitle="Dashboard">
-            {view === 'dashboard' && <div className="overflow-y-auto flex-1"><Dashboard onNavigate={navigateTo} /></div>}
+            {view === 'dashboard' && <div className="overflow-y-auto flex-1 min-h-0"><Dashboard onNavigate={navigateTo} /></div>}
           </ErrorBoundary>
 
           <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} onNavigate={navigateTo} />
@@ -297,18 +297,18 @@ export default function Home() {
 
           {/* DOCUMENT HISTORY */}
           <ErrorBoundary fallbackTitle="Document History">
-            {view === 'doc_history' && <div className="overflow-y-auto flex-1"><DocumentHistory onNavigate={navigateTo} /></div>}
+            {view === 'doc_history' && <div className="overflow-y-auto flex-1 min-h-0"><DocumentHistory onNavigate={navigateTo} /></div>}
           </ErrorBoundary>
 
           {/* BATCH GENERATION */}
           <ErrorBoundary fallbackTitle="Batch Generator">
-            {view === 'batch_generation' && <div className="overflow-y-auto flex-1"><BatchGenerator /></div>}
+            {view === 'batch_generation' && <div className="overflow-y-auto flex-1 min-h-0"><BatchGenerator /></div>}
           </ErrorBoundary>
 
           {/* SETTINGS */}
           <ErrorBoundary fallbackTitle="Settings">
             {view === 'settings' && (
-              <div className="flex-1 p-6 overflow-y-auto">
+              <div className="flex-1 min-h-0 p-6 overflow-y-auto">
                 <div className="max-w-2xl mx-auto">
                   <SettingsForm />
                 </div>
