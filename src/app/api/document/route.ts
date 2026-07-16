@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { renderDocument } from '@/lib/templates/index'
+import { ensureSeeded } from '@/lib/seed'
 
 const FALLBACK_DATA: Record<string, Record<string, any>> = {
   payslip: {
@@ -188,7 +189,7 @@ export async function GET(request: NextRequest) {
     'show_cause', 'warning_letter', 'suspension_letter', 'termination_letter',
     'resignation_acceptance', 'relieving_letter', 'clearance_cert', 'fnf_settlement',
     'promotion_letter', 'pip_letter', 'appreciation_letter',
-    'leave_approval', 'lwp_notice',
+    'leave_approval', 'lwp_notice', 'hr_handbook', 'leave_policy',
   ]
   if (!validTypes.includes(docType)) {
     return NextResponse.json({ error: 'Invalid document type' }, { status: 400 })
@@ -212,7 +213,7 @@ export async function POST(request: NextRequest) {
       'show_cause', 'warning_letter', 'suspension_letter', 'termination_letter',
       'resignation_acceptance', 'relieving_letter', 'clearance_cert', 'fnf_settlement',
       'promotion_letter', 'pip_letter', 'appreciation_letter',
-      'leave_approval', 'lwp_notice',
+      'leave_approval', 'lwp_notice', 'hr_handbook', 'leave_policy',
     ]
     if (!validTypes.includes(docType)) {
       return NextResponse.json({ error: 'Invalid document type' }, { status: 400 })

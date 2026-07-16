@@ -7,7 +7,7 @@ import { authHeaders } from '@/lib/api-client'
 import { toast } from 'sonner'
 import { addDocHistory } from '@/lib/doc-history'
 
-const COMPLEX_DOC_TYPES = ['payslip', 'work_order', 'purchase_order', 'requisition']
+const COMPLEX_DOC_TYPES: string[] = []
 
 export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | null>) {
   const preview = usePreviewData()
