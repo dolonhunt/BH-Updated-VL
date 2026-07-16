@@ -277,19 +277,19 @@ export default function Home() {
 
           {/* TEMPLATE ADMIN */}
           <ErrorBoundary fallbackTitle="Template Admin">
-            {view === 'template_admin' && <div className="overflow-y-auto flex-1"><TemplateAdmin /></div>}
+            {view === 'template_admin' && <div className="overflow-y-auto flex-1 min-h-0"><TemplateAdmin /></div>}
           </ErrorBoundary>
 
           {/* HR MOD - Employees list & form */}
           <ErrorBoundary fallbackTitle="Employee Module">
             {view === 'employees' && (
-              <div className="flex-1 overflow-hidden">
+              <div className="flex-1 min-h-0 overflow-y-auto">
                 <EmployeeModule route="employees-add" onNavigate={navigateTo} />
               </div>
             )}
 
             {view === 'employee_list' && (
-              <div className="flex-1 overflow-hidden">
+              <div className="flex-1 min-h-0 overflow-y-auto">
                 <EmployeeModule route="employees-list" onNavigate={navigateTo} />
               </div>
             )}

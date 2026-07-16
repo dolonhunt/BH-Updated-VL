@@ -147,8 +147,13 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
         const html2pdf = (await import('html2pdf.js')).default
         const container = document.createElement('div')
         container.innerHTML = htmlToUse
+        container.style.position = 'fixed'
+        container.style.left = '-9999px'
+        container.style.top = '0'
+        container.style.zIndex = '-1'
         const pageEl = container.querySelector('.page') || container.querySelector('.doc-wrapper') || container
         document.body.appendChild(container)
+        await new Promise(r => requestAnimationFrame(r))
 
         const docLabel = preview.docType.replace('_', '-')
         const fileName = preview.formData.name 
