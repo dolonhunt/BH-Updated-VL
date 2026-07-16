@@ -1,6 +1,6 @@
 import { authHeaders } from './api-client'
 
-const JSON_HEADERS = (): Record<string, string> => ({ 'Content-Type': 'application/json', ...authHeaders() })
+const JSON_HEADERS = () => ({ 'Content-Type': 'application/json', ...authHeaders() } as Record<string, string>)
 
 // ─── DEPRECATED: This file is being replaced by API routes ───
 // The TypeScript interfaces (Employee, CompanyConfig) are still exported
