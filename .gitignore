@@ -80,6 +80,10 @@ examples/
 mini-services/
 tests/
 
+# Unit tests (Vitest) — tracked
+!/tests/
+!/tests/**
+
 # standalone/legacy files
 Caddyfile
 ORIGINAL_REQUEST.md
