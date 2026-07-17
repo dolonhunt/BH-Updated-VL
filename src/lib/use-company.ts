@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { toast } from 'sonner'
 import { type CompanyConfig } from './storage'
 import { authHeaders } from './api-client'
 
@@ -32,6 +33,7 @@ function getSnapshot(): CompanyConfig {
         .catch(err => {
           // eslint-disable-next-line no-console
           console.error(err)
+          toast.error('Failed to load company settings. Using defaults.', { id: 'company-load-error' })
           cached = DEFAULT_COMPANY
           return cached as CompanyConfig
         })

@@ -15,6 +15,7 @@ import { Separator } from '@/components/ui/separator'
 import { useAllEmployees, invalidateEmployeeCache } from '@/lib/use-employees'
 import { saveEmployee, type Employee } from '@/lib/storage'
 import { calculateGross, calculateNet, formatBDTShort } from '@/lib/calculations'
+import { toast } from 'sonner'
 
 interface EmployeeFormViewProps {
   employeeId: string | null
@@ -147,10 +148,12 @@ export function EmployeeFormView({ employeeId, onCancel, onSaved }: EmployeeForm
       }
       await saveEmployee(emp)
       invalidateEmployeeCache()
+      toast.success(isEditing ? 'Employee updated' : 'Employee saved')
       onSaved()
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error('Failed to save employee:', err)
+      toast.error(isEditing ? 'Failed to update employee' : 'Failed to save employee')
     } finally {
       setSaving(false)
     }

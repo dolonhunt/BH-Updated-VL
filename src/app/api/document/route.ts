@@ -194,9 +194,15 @@ export async function GET(request: NextRequest) {
   if (!validTypes.includes(docType)) {
     return NextResponse.json({ error: 'Invalid document type' }, { status: 400 })
   }
-  const data = FALLBACK_DATA[docType] || FALLBACK_DATA.payslip
-  const html = await renderDocument(docType, data)
-  return new NextResponse(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+  try {
+    const data = FALLBACK_DATA[docType] || FALLBACK_DATA.payslip
+    const html = await renderDocument(docType, data)
+    return new NextResponse(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Document render error:', err)
+    return NextResponse.json({ error: 'Failed to render document' }, { status: 500 })
+  }
 }
 
 export async function POST(request: NextRequest) {

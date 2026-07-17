@@ -8,6 +8,7 @@ import { detectMismatches, applyFormToEmployee, DOC_MISMATCH_FIELDS } from '@/li
 import { useConfirmDiscard } from '@/lib/confirm-discard-context'
 import type { MismatchAction } from '@/lib/mismatch'
 import { setPreviewData, clearPreviewData, usePreviewData, setPreviewHasManualEdits } from '@/lib/preview-store'
+import { toast } from 'sonner'
 
 interface UseDocumentFormOptions<T extends Record<string, any>> {
   docType: string
@@ -160,6 +161,7 @@ export function useDocumentForm<T extends Record<string, any>>(options: UseDocum
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error('Failed to save employee mismatch update', err)
+        toast.error('Could not update employee record. Generated document uses the edited values only.')
       }
     }
     setPreviewData(docType, formData)

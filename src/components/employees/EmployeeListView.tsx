@@ -25,6 +25,7 @@ import {
 import { useAllEmployees, invalidateEmployeeCache } from '@/lib/use-employees'
 import { deleteEmployee } from '@/lib/storage'
 import { formatBDTShort } from '@/lib/calculations'
+import { toast } from 'sonner'
 
 interface EmployeeListViewProps {
   onEdit: (id: string) => void
@@ -54,9 +55,11 @@ export function EmployeeListView({ onEdit, onAddNew, onViewDocs }: EmployeeListV
     try {
       await deleteEmployee(deleteTarget.id)
       invalidateEmployeeCache()
+      toast.success(`Deleted ${deleteTarget.name}`)
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error('Failed to delete employee:', err)
+      toast.error(`Failed to delete ${deleteTarget.name}`)
     }
     setDeleteTarget(null)
   }

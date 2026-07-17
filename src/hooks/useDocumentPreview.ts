@@ -48,18 +48,21 @@ export function useDocumentPreview(iframeRef?: RefObject<HTMLIFrameElement | nul
             data,
           }),
         })
-        if (res.ok) {
-          const html = await res.text()
-          setPreviewHtml(html)
-          const blob = new Blob([html], { type: 'text/html' })
-          const url = URL.createObjectURL(blob)
-          if (prevBlobRef.current) URL.revokeObjectURL(prevBlobRef.current)
-          prevBlobRef.current = url
-          setPreviewSrc(url)
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}))
+          throw new Error(errData.error || `Preview request failed (HTTP ${res.status})`)
         }
+        const html = await res.text()
+        setPreviewHtml(html)
+        const blob = new Blob([html], { type: 'text/html' })
+        const url = URL.createObjectURL(blob)
+        if (prevBlobRef.current) URL.revokeObjectURL(prevBlobRef.current)
+        prevBlobRef.current = url
+        setPreviewSrc(url)
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error('Failed to fetch preview:', err)
+        toast.error('Failed to update preview.', { id: 'preview-error' })
       }
     }
 
