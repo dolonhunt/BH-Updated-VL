@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile, stat, readdir } from 'fs/promises';
-import { join, extname, relative } from 'path';
+import { join, extname, relative, resolve, sep } from 'path';
 
-const PROJECT_ROOT = '/home/z/my-project';
+const PROJECT_ROOT = resolve(process.env.FILES_ROOT || process.cwd());
 
 const MIME_TYPES: Record<string, string> = {
   '.html': 'text/html',
@@ -31,13 +31,26 @@ function getMimeType(filePath: string): string {
 
 export async function GET(request: NextRequest) {
   try {
+    // This is a developer-only file browser. Never expose it in production.
+    if (process.env.NODE_ENV === 'production') {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+
     const { searchParams } = new URL(request.url);
     const action = searchParams.get('action') || 'list';
     const path = searchParams.get('path') || '/';
 
-    // Resolve and validate path stays within project
-    const resolvedPath = join(PROJECT_ROOT, path);
-    if (!resolvedPath.startsWith(PROJECT_ROOT)) {
+    // Resolve and validate that the target stays within PROJECT_ROOT.
+    // Compare against PROJECT_ROOT + separator to avoid sibling-prefix
+    // bypasses (e.g. "/root-secrets" starting with "/root").
+    const resolvedPath = resolve(join(PROJECT_ROOT, path));
+    if (resolvedPath !== PROJECT_ROOT && !resolvedPath.startsWith(PROJECT_ROOT + sep)) {
+      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
+    // Never serve secret-bearing files, even in development.
+    const baseName = resolvedPath.split(sep).pop() || '';
+    if (baseName === '.env' || baseName.startsWith('.env.') || baseName.endsWith('.pem') || baseName.endsWith('.key')) {
       return NextResponse.json({ error: 'Access denied' }, { status: 403 });
     }
 
