@@ -82,3 +82,10 @@ export const TEMPLATE_REGISTRY: Record<string, TemplateRegistryEntry> = {
 }
 
 export const TEMPLATES: TemplateRegistryEntry[] = Object.values(TEMPLATE_REGISTRY)
+
+/** All registered document type keys — the single source of truth for valid types. */
+export const VALID_DOC_TYPES: string[] = Object.keys(TEMPLATE_REGISTRY)
+
+export function isValidDocType(docType: string): boolean {
+  return docType in TEMPLATE_REGISTRY
+}

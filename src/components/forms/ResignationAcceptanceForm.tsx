@@ -5,10 +5,10 @@ import { EmployeeSelect } from './EmployeeSelect'
 import { FormField } from './FormField'
 import { MismatchModal } from './MismatchModal'
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
 import type { Employee } from '@/lib/storage'
 import { calculateDuration } from '@/lib/calculations'
 import { validateRequiredFields } from '@/lib/validate'
+import { AddEmployeeFirstNotice, GeneratedBanner, PrimaryActionButton, SectionHeading } from './FormPrimitives'
 
 interface ResignationAcceptanceFormData {
   name: string
@@ -87,16 +87,14 @@ export function ResignationAcceptanceForm() {
           />
 
           {selectedEmployeeId === '__new__' && (
-            <div className="text-center text-xs text-gray-500 p-3 bg-gray-50 rounded-lg border border-gray-200">
-              Please add employee first
-            </div>
+            <AddEmployeeFirstNotice />
           )}
 
           {showFields && (
             <>
               <Separator />
               <div className="space-y-3">
-                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Employee Info</h4>
+                <SectionHeading>Employee Info</SectionHeading>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                   <FormField label="Name" value={formData.name} onChange={v => setField('name', v)} error={errors.name} />
                   <FormField label="Designation" value={formData.designation} onChange={v => setField('designation', v)} error={errors.designation} />
@@ -107,7 +105,7 @@ export function ResignationAcceptanceForm() {
 
               <Separator />
               <div className="space-y-3">
-                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Dates &amp; Notice</h4>
+                <SectionHeading>Dates &amp; Notice</SectionHeading>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                   <FormField label="Joining Date" type="date" value={formData.joining_date} onChange={v => setField('joining_date', v)} error={errors.joining_date} />
                   <FormField label="Resignation Date" type="date" value={formData.resignation_date} onChange={v => setField('resignation_date', v)} error={errors.resignation_date} />
@@ -119,16 +117,9 @@ export function ResignationAcceptanceForm() {
               </div>
 
               {generated ? (
-                <div className="text-center text-xs text-emerald-600 font-medium p-3 bg-emerald-50 rounded-lg border border-emerald-200">
-                  ✓ Resignation Acceptance generated. See live preview →
-                </div>
+                <GeneratedBanner>✓ Resignation Acceptance generated. See live preview →</GeneratedBanner>
               ) : (
-                <Button
-                  onClick={handleGenerate}
-                  className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
-                >
-                  Generate Resignation Acceptance
-                </Button>
+                <PrimaryActionButton onClick={handleGenerate}>Generate Resignation Acceptance</PrimaryActionButton>
               )}
             </>
           )}

@@ -4,9 +4,9 @@ import { EmployeeSelect } from './EmployeeSelect'
 import { FormField } from './FormField'
 import { MismatchModal } from './MismatchModal'
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
 import type { Employee } from '@/lib/storage'
 import { validateRequiredFields } from '@/lib/validate'
+import { AddEmployeeFirstNotice, GeneratedBanner, PrimaryActionButton, SectionHeading } from './FormPrimitives'
 
 interface WarningLetterFormData {
   name: string; designation: string; department: string; ref_code: string
@@ -41,11 +41,11 @@ export function WarningLetterForm() {
       <div className="flex-1 overflow-y-auto">
         <div className="p-4 space-y-4">
           <EmployeeSelect employees={employees} value={selectedEmployeeId} onChange={handleEmployeeChange} />
-          {selectedEmployeeId === '__new__' && <div className="text-center text-xs text-gray-500 p-3 bg-gray-50 rounded-lg border border-gray-200">Please add employee first</div>}
+          {selectedEmployeeId === '__new__' && <AddEmployeeFirstNotice />}
           {show && <>
             <Separator />
             <div className="space-y-3">
-              <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Employee Info</h4>
+              <SectionHeading>Employee Info</SectionHeading>
               <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                 <FormField label="Name" value={formData.name} onChange={v => setField('name', v)} error={errors.name} />
                 <FormField label="Designation" value={formData.designation} onChange={v => setField('designation', v)} error={errors.designation} />
@@ -55,14 +55,14 @@ export function WarningLetterForm() {
             </div>
             <Separator />
             <div className="space-y-3">
-              <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Warning Details</h4>
+              <SectionHeading>Warning Details</SectionHeading>
               <FormField label="Incident Details" value={formData.incident_details} onChange={v => setField('incident_details', v)} error={errors.incident_details} />
               <FormField label="Letter Date" type="date" value={formData.date} onChange={v => setField('date', v)} />
             </div>
             {generated ? (
-              <div className="text-center text-xs text-emerald-600 font-medium p-3 bg-emerald-50 rounded-lg border border-emerald-200">✓ Warning Letter generated.</div>
+              <GeneratedBanner>✓ Warning Letter generated.</GeneratedBanner>
             ) : (
-              <Button onClick={handleGenerate} className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90">Generate Warning Letter</Button>
+              <PrimaryActionButton onClick={handleGenerate}>Generate Warning Letter</PrimaryActionButton>
             )}
           </>}
         </div>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { renderDocument } from '@/lib/templates/index'
+import { isValidDocType } from '@/lib/templates/template-registry'
 import { ensureSeeded } from '@/lib/seed'
 
 const FALLBACK_DATA: Record<string, Record<string, any>> = {
@@ -180,18 +181,7 @@ const FALLBACK_DATA: Record<string, Record<string, any>> = {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const docType = searchParams.get('type') || 'payslip'
-  const validTypes = [
-    'payslip', 'salary_cert', 'appointment', 'experience', 'employment_cert',
-    'official_pad', 'work_order', 'purchase_order', 'requisition',
-    'offer_letter', 'nda', 'joining_report', 'id_card_form', 'personal_info_form',
-    'probation_confirmation', 'noc_letter', 'bank_intro_letter', 'embassy_letter',
-    'salary_increment', 'bonus_letter', 'arrear_payment',
-    'show_cause', 'warning_letter', 'suspension_letter', 'termination_letter',
-    'resignation_acceptance', 'relieving_letter', 'clearance_cert', 'fnf_settlement',
-    'promotion_letter', 'pip_letter', 'appreciation_letter',
-    'leave_approval', 'lwp_notice', 'hr_handbook', 'leave_policy',
-  ]
-  if (!validTypes.includes(docType)) {
+  if (!isValidDocType(docType)) {
     return NextResponse.json({ error: 'Invalid document type' }, { status: 400 })
   }
   try {
@@ -211,18 +201,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const docType = body.type || 'payslip'
     const formData = body.data || {}
-    const validTypes = [
-      'payslip', 'salary_cert', 'appointment', 'experience', 'employment_cert',
-      'official_pad', 'work_order', 'purchase_order', 'requisition',
-      'offer_letter', 'nda', 'joining_report', 'id_card_form', 'personal_info_form',
-      'probation_confirmation', 'noc_letter', 'bank_intro_letter', 'embassy_letter',
-      'salary_increment', 'bonus_letter', 'arrear_payment',
-      'show_cause', 'warning_letter', 'suspension_letter', 'termination_letter',
-      'resignation_acceptance', 'relieving_letter', 'clearance_cert', 'fnf_settlement',
-      'promotion_letter', 'pip_letter', 'appreciation_letter',
-      'leave_approval', 'lwp_notice', 'hr_handbook', 'leave_policy',
-    ]
-    if (!validTypes.includes(docType)) {
+    if (!isValidDocType(docType)) {
       return NextResponse.json({ error: 'Invalid document type' }, { status: 400 })
     }
     const html = await renderDocument(docType, formData)

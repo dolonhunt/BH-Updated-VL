@@ -3,6 +3,7 @@
 import { useDocumentForm } from '@/hooks/useDocumentForm'
 import { FormField } from './FormField'
 import { Button } from '@/components/ui/button'
+import { PrimaryActionButton } from './FormPrimitives'
 
 interface Manpower {
   dept: string
@@ -196,13 +197,7 @@ export function RequisitionForm() {
         </p>
       </div>
 
-      <Button
-        type="button"
-        onClick={handleGenerate}
-        className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
-      >
-        Update Document Preview
-      </Button>
+      <PrimaryActionButton onClick={handleGenerate}>Update Document Preview</PrimaryActionButton>
     </div>
   )
 }

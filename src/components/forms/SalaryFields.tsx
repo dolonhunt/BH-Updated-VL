@@ -3,6 +3,7 @@
 import { FormField } from './FormField'
 import { Separator } from '@/components/ui/separator'
 import type { MismatchField } from '@/lib/mismatch'
+import { SectionHeading } from './FormPrimitives'
 
 interface SalaryFieldsProps {
   formData: Record<string, any>
@@ -26,7 +27,7 @@ export function SalaryFields({ formData, setField, mismatches, showCash = true, 
 
   return (
     <div className="space-y-3">
-      <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Earnings</h4>
+      <SectionHeading>Earnings</SectionHeading>
       <div className="grid grid-cols-2 gap-x-3 gap-y-2">
         {numField('basic', 'Basic Salary')}
         {numField('house_rent', 'House Rent')}
@@ -48,7 +49,7 @@ export function SalaryFields({ formData, setField, mismatches, showCash = true, 
         </div>
       )}
       <Separator className="my-1" />
-      <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Deductions</h4>
+      <SectionHeading>Deductions</SectionHeading>
       <div className="grid grid-cols-2 gap-x-3 gap-y-2">
         {numField('tax', 'Source Tax (AIT)')}
         {numField('net', 'Net Salary', true)}
@@ -56,7 +57,7 @@ export function SalaryFields({ formData, setField, mismatches, showCash = true, 
       {showAnnual && (
         <>
           <Separator className="my-1" />
-          <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Annual</h4>
+          <SectionHeading>Annual</SectionHeading>
           <div className="grid grid-cols-2 gap-x-3 gap-y-2">
             {numField('annual_gross', 'Annual Gross', true)}
             {numField('annual_net', 'Annual Net', true)}

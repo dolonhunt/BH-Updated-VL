@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { PrimaryActionButton } from './FormPrimitives'
 
 interface ServiceItem {
   label: string
@@ -521,13 +522,7 @@ export function WorkOrderForm() {
         </div>
       </div>
 
-      <Button
-        type="button"
-        onClick={handleGenerate}
-        className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
-      >
-        Update Document Preview
-      </Button>
+      <PrimaryActionButton onClick={handleGenerate}>Update Document Preview</PrimaryActionButton>
     </div>
   )
 }
