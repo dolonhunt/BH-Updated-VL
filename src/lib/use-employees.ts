@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { toast } from 'sonner'
 import { type Employee } from './storage'
 import { authHeaders } from './api-client'
 
@@ -24,6 +25,7 @@ function getSnapshot(): Employee[] {
         .catch(err => {
           // eslint-disable-next-line no-console
           console.error(err)
+          toast.error('Failed to load employees.', { id: 'employees-load-error' })
           cached = []
           return cached
         })
