@@ -3,7 +3,6 @@
 import { useDocumentForm } from '@/hooks/useDocumentForm'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -12,6 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
+import { PrimaryActionButton } from './FormPrimitives'
 
 interface OfficialPadFormData {
   watermark: boolean
@@ -123,13 +123,7 @@ export function OfficialPadForm() {
         <p className="text-xs text-gray-600">• Use PDF/DOC buttons to export the result</p>
       </div>
 
-      <Button
-        type="button"
-        onClick={handleGenerate}
-        className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
-      >
-        Update Document Preview
-      </Button>
+      <PrimaryActionButton onClick={handleGenerate}>Update Document Preview</PrimaryActionButton>
     </div>
   )
 }

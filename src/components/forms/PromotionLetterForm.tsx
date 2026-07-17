@@ -5,10 +5,10 @@ import { EmployeeSelect } from './EmployeeSelect'
 import { FormField } from './FormField'
 import { MismatchModal } from './MismatchModal'
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
 import type { Employee } from '@/lib/storage'
 import { numberToWords } from '@/lib/calculations'
 import { validateRequiredFields } from '@/lib/validate'
+import { AddEmployeeFirstNotice, GeneratedBanner, PrimaryActionButton, SectionHeading } from './FormPrimitives'
 
 interface PromotionLetterFormData {
   name: string
@@ -92,16 +92,14 @@ export function PromotionLetterForm() {
           />
 
           {selectedEmployeeId === '__new__' && (
-            <div className="text-center text-xs text-gray-500 p-3 bg-gray-50 rounded-lg border border-gray-200">
-              Please add employee first
-            </div>
+            <AddEmployeeFirstNotice />
           )}
 
           {showFields && (
             <>
               <Separator />
               <div className="space-y-3">
-                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Employee Info</h4>
+                <SectionHeading>Employee Info</SectionHeading>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                   <FormField label="Name" value={formData.name} onChange={v => setField('name', v)} error={errors.name} />
                   <FormField label="Current Designation" value={formData.old_designation} onChange={v => setField('old_designation', v)} error={errors.designation} />
@@ -112,7 +110,7 @@ export function PromotionLetterForm() {
 
               <Separator />
               <div className="space-y-3">
-                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Promotion Details</h4>
+                <SectionHeading>Promotion Details</SectionHeading>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                   <FormField label="New Designation" value={formData.new_designation} onChange={v => setField('new_designation', v)} error={errors.new_designation} />
                   <FormField label="Effective Date" type="date" value={formData.effective_date} onChange={v => setField('effective_date', v)} error={errors.effective_date} />
@@ -123,16 +121,9 @@ export function PromotionLetterForm() {
               </div>
 
               {generated ? (
-                <div className="text-center text-xs text-emerald-600 font-medium p-3 bg-emerald-50 rounded-lg border border-emerald-200">
-                  ✓ Promotion Letter generated. See live preview →
-                </div>
+                <GeneratedBanner>✓ Promotion Letter generated. See live preview →</GeneratedBanner>
               ) : (
-                <Button
-                  onClick={handleGenerate}
-                  className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
-                >
-                  Generate Promotion Letter
-                </Button>
+                <PrimaryActionButton onClick={handleGenerate}>Generate Promotion Letter</PrimaryActionButton>
               )}
             </>
           )}

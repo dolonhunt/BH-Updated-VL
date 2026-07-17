@@ -5,9 +5,9 @@ import { EmployeeSelect } from './EmployeeSelect'
 import { FormField } from './FormField'
 import { MismatchModal } from './MismatchModal'
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
 import type { Employee } from '@/lib/storage'
 import { validateRequiredFields } from '@/lib/validate'
+import { AddEmployeeFirstNotice, GeneratedBanner, PrimaryActionButton, SectionHeading } from './FormPrimitives'
 
 interface JoiningReportFormData {
   name: string
@@ -71,16 +71,14 @@ export function JoiningReportForm() {
           />
 
           {selectedEmployeeId === '__new__' && (
-            <div className="text-center text-xs text-gray-500 p-3 bg-gray-50 rounded-lg border border-gray-200">
-              Please add employee first
-            </div>
+            <AddEmployeeFirstNotice />
           )}
 
           {showFields && (
             <>
               <Separator />
               <div className="space-y-3">
-                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Joining Report</h4>
+                <SectionHeading>Joining Report</SectionHeading>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                   <FormField label="Name" value={formData.name} onChange={v => setField('name', v)} className="col-span-2" error={errors.name} />
                   <FormField label="Designation" value={formData.designation} onChange={v => setField('designation', v)} className="col-span-2" error={errors.designation} />
@@ -91,16 +89,9 @@ export function JoiningReportForm() {
               </div>
 
               {generated ? (
-                <div className="text-center text-xs text-emerald-600 font-medium p-3 bg-emerald-50 rounded-lg border border-emerald-200">
-                  ✓ Joining Report generated. See live preview →
-                </div>
+                <GeneratedBanner>✓ Joining Report generated. See live preview →</GeneratedBanner>
               ) : (
-                <Button
-                  onClick={handleGenerate}
-                  className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
-                >
-                  Generate Joining Report
-                </Button>
+                <PrimaryActionButton onClick={handleGenerate}>Generate Joining Report</PrimaryActionButton>
               )}
             </>
           )}

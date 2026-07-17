@@ -6,10 +6,10 @@ import { FormField } from './FormField'
 import { SalaryFields } from './SalaryFields'
 import { MismatchModal } from './MismatchModal'
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
 import type { Employee } from '@/lib/storage'
 import { calculateGross, calculateNet, calculateBankTotal } from '@/lib/calculations'
 import { validateRequiredFields } from '@/lib/validate'
+import { AddEmployeeFirstNotice, GeneratedBanner, PrimaryActionButton, SectionHeading } from './FormPrimitives'
 
 interface PaySlipFormData {
   employee_id: string
@@ -122,16 +122,14 @@ export function PaySlipForm() {
           />
 
           {selectedEmployeeId === '__new__' && (
-            <div className="text-center text-xs text-gray-500 p-3 bg-gray-50 rounded-lg border border-gray-200">
-              Please add employee first
-            </div>
+            <AddEmployeeFirstNotice />
           )}
 
           {showFields && (
             <>
               <Separator />
               <div className="space-y-3">
-                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Employee Info</h4>
+                <SectionHeading>Employee Info</SectionHeading>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                   <FormField label="Employee ID" value={formData.employee_id} onChange={v => setField('employee_id', v)} readOnly />
                   <FormField label="Name" value={formData.name} onChange={v => setField('name', v)} error={errors.name} />
@@ -142,7 +140,7 @@ export function PaySlipForm() {
 
               <Separator />
               <div className="space-y-3">
-                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Pay Period</h4>
+                <SectionHeading>Pay Period</SectionHeading>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                   <FormField label="Date" type="date" value={formData.date} onChange={v => setField('date', v)} />
                   <FormField label="Ref Code" value={formData.ref_code} onChange={v => setField('ref_code', v)} />
@@ -153,7 +151,7 @@ export function PaySlipForm() {
 
               <Separator />
               <div className="space-y-3">
-                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Attendance</h4>
+                <SectionHeading>Attendance</SectionHeading>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                   <FormField label="Days in Month" type="number" value={formData.days_in_month} onChange={v => setField('days_in_month', v === '' ? 0 : Number(v))} />
                   <FormField label="Days Present" type="number" value={formData.days_present} onChange={v => setField('days_present', v === '' ? 0 : Number(v))} />
@@ -166,16 +164,9 @@ export function PaySlipForm() {
               <SalaryFields formData={formData} setField={setField} mismatches={mismatches} />
 
               {generated ? (
-                <div className="text-center text-xs text-emerald-600 font-medium p-3 bg-emerald-50 rounded-lg border border-emerald-200">
-                  ✓ Payslip generated. See live preview →
-                </div>
+                <GeneratedBanner>✓ Payslip generated. See live preview →</GeneratedBanner>
               ) : (
-                <Button
-                  onClick={handleGenerate}
-                  className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
-                >
-                  Generate Payslip
-                </Button>
+                <PrimaryActionButton onClick={handleGenerate}>Generate Payslip</PrimaryActionButton>
               )}
             </>
           )}

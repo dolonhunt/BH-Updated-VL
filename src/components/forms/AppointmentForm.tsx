@@ -6,11 +6,11 @@ import { FormField } from './FormField'
 import { SalaryFields } from './SalaryFields'
 import { MismatchModal } from './MismatchModal'
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
 import type { Employee } from '@/lib/storage'
 import { calculateGross, calculateNet } from '@/lib/calculations'
 import { saveEmployee } from '@/lib/storage'
 import { invalidateEmployeeCache } from '@/lib/use-employees'
+import { GeneratedBanner, PrimaryActionButton, SectionHeading } from './FormPrimitives'
 
 interface AppointmentFormData {
   name: string
@@ -155,7 +155,7 @@ export function AppointmentForm() {
     <>
       <Separator />
       <div className="space-y-3">
-        <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Employee Info</h4>
+        <SectionHeading>Employee Info</SectionHeading>
         <div className="grid grid-cols-2 gap-x-3 gap-y-1">
           <FormField label="Name" value={formData.name} onChange={v => setField('name', v)} error={errors.name} />
           <FormField label="Designation" value={formData.designation} onChange={v => setField('designation', v)} error={errors.designation} />
@@ -166,7 +166,7 @@ export function AppointmentForm() {
 
       <Separator />
       <div className="space-y-3">
-        <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Dates</h4>
+        <SectionHeading>Dates</SectionHeading>
         <div className="grid grid-cols-2 gap-x-3 gap-y-1">
           <FormField label="Letter Date" type="date" value={formData.letter_date} onChange={v => setField('letter_date', v)} />
           <FormField label="Joining Date" type="date" value={formData.joining_date} onChange={v => setField('joining_date', v)} error={errors.joining_date} />
@@ -177,23 +177,11 @@ export function AppointmentForm() {
       <SalaryFields formData={formData} setField={setField} mismatches={isNewEmployee ? [] : mismatches} showCash showBankTotal={false} showAnnual={false} />
 
       {generated ? (
-        <div className="text-center text-xs text-emerald-600 font-medium p-3 bg-emerald-50 rounded-lg border border-emerald-200">
-          ✓ Appointment Letter generated. See live preview →
-        </div>
+        <GeneratedBanner>✓ Appointment Letter generated. See live preview →</GeneratedBanner>
       ) : isNewEmployee ? (
-        <Button
-          onClick={handleSaveNewEmployee}
-          className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
-        >
-          Save as New Employee & Generate
-        </Button>
+        <PrimaryActionButton onClick={handleSaveNewEmployee}>Save as New Employee & Generate</PrimaryActionButton>
       ) : (
-        <Button
-          onClick={handleGenerate}
-          className="w-full text-white font-semibold h-9 bg-brand-red hover:bg-brand-red/90"
-        >
-          Generate Appointment Letter
-        </Button>
+        <PrimaryActionButton onClick={handleGenerate}>Generate Appointment Letter</PrimaryActionButton>
       )}
     </>
   ) : null
